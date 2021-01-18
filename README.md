@@ -150,7 +150,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       }
 
   }
-  
   ```
 
 * Criar da classe **br.com.impacta.fullstack.credito.CreditoService**
@@ -183,7 +182,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
         return creditoList;
     }
   }
-
   ```
 
 * Criar da classe **br.com.impacta.fullstack.credito.CreditoController**
@@ -213,7 +211,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       }
 
   }
-
   ```
 
 * Ajustes na configuração de porta para evitar conflitos no arquivo **src/main/resources/application.properties**:
