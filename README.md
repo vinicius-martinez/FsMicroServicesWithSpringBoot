@@ -249,7 +249,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       Spring Web
     ```
 
-    ![Criação Credito API](images/workshop-criacao-credito-api/criacao-projeto-debito.png)
+    ![Criação Debito API](images/workshop-criacao-debito-api/criacao-projeto-debito.png)
 
   * Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
 
