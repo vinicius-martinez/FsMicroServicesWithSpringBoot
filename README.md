@@ -400,7 +400,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   * Criar da classe **br.com.impacta.fullstack.credito.DebitoController**
 
     ```
-    package br.com.impacta.fullstack.credito;
+    package br.com.impacta.fullstack.debito;
 
     import org.springframework.web.bind.annotation.GetMapping;
     import org.springframework.web.bind.annotation.RequestMapping;
@@ -409,27 +409,26 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     import java.util.List;
 
     @RestController
-    @RequestMapping("/api/v1/credito")
-    public class CreditoController {
+    @RequestMapping("/api/v1/debito")
+    public class DebitoController {
 
-        private final CreditoService creditoService;
+        private final DebitoService debitoService;
 
-        public CreditoController(CreditoService creditoService) {
-            this.creditoService = creditoService;
+        public DebitoController(DebitoService debitoService) {
+            this.debitoService = debitoService;
         }
 
         @GetMapping
-        public List<Credito> list(){
-            return creditoService.list();
+        public List<Debito> list(){
+            return debitoService.list();
         }
-
     }
     ```
 
   * Ajustes na configuração de porta para evitar conflitos no arquivo **src/main/resources/application.properties**:
 
     ```
-    server.port = 8081
+    server.port = 8082
     ```
 
   * Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
