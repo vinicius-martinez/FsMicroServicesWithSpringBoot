@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.impacta.fullstack</groupId>
-	<artifactId>debito-api</artifactId>
+	<artifactId>debito</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>debito-api</name>
+	<name>debito</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

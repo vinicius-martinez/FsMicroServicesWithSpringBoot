@@ -1,10 +1,10 @@
-package br.com.impacta.fullstack.debitoapi;
+package br.com.impacta.fullstack.debito;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DebitoApiApplicationTests {
+class DebitoApplicationTests {
 
 	@Test
 	void contextLoads() {
