@@ -440,4 +440,4 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     http :8082/api/v1/debito
     ```
 
-    ![Execução Credito API](images/workshop-criacao-credito-api/execucao-teste-credito.png)
+    ![Execução Debito API](images/workshop-criacao-debito-api/execucao-teste-debito.png)
