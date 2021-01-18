@@ -5,9 +5,10 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 ## Pré Requisitos
 
 - [JDK/Open JDK 11 (no mínimo)](https://openjdk.java.net/install/)
-- [Apache Maven 3.6.3](https://maven.apache.org/download.cgi)
+- [Apache Maven 3.6.x](https://maven.apache.org/download.cgi)
 - [IntelliJ Community](https://www.jetbrains.com/idea/download/#section=mac)
-- [Docker 3.x]()
+- [Docker Desktop Win/Mac 3.x](https://www.docker.com/products/docker-desktop)
+- [Docker Desktop Win/Mac 3.x](https://www.docker.com/products/docker-desktop)
 
 ## Workshop
 
@@ -217,3 +218,14 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
   server.port = 8081
   ```
+
+* Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
+
+  ```
+  mvn spring:boot run
+
+  -- outra aba do terminal/postman,/httpie
+  http :8081/api/v1/credito
+  ```
+
+  ![Execução Credito API](images/workshop-criacao-credito-api/execucao-teste-credito.png)
