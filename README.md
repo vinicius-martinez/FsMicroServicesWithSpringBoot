@@ -224,7 +224,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
   mvn spring:boot run
 
-  -- outra aba do terminal/postman,/httpie
+  -- outra aba do terminal/postman/httpie/curl/etc
   http :8081/api/v1/credito
   ```
 
