@@ -35,4 +35,4 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     Java: 11
   ```
 
-* ![Criação Credito API](images/workshop-criacao-credito-api/criacao-projeto-credito.png)
+  ![Criação Credito API](images/workshop-criacao-credito-api/criacao-projeto-credito.png)
