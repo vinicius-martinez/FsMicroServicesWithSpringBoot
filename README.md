@@ -8,7 +8,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 - [Apache Maven 3.6.x](https://maven.apache.org/download.cgi)
 - [IntelliJ Community](https://www.jetbrains.com/idea/download/#section=mac)
 - [Docker Desktop Win/Mac 3.x](https://www.docker.com/products/docker-desktop)
-- [Docker Desktop Win/Mac 3.x](https://www.docker.com/products/docker-desktop)
 
 ## Workshop
 
@@ -441,3 +440,85 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     ```
 
     ![Execução Debito API](images/workshop-criacao-debito-api/execucao-teste-debito.png)
+
+### 3 - Criação SaldoExtrato API <a name="workshop-criacao-saldoextrato-api">
+
+* Acesse o [Spring Boot Initializer](https://start.spring.io/) e gere um projeto com as seguintes informações:
+
+  ```
+  Project: Maven
+  Language: Java
+  Spring Boot: 2.4.2
+  Project Metadata
+    Group: br.com.impacta.fullstack
+    artifact: saldoextrato
+    name: saldoextrato
+    Package Name: br.com.impacta.fullstack.saldoextrato
+    Packaging: jar
+    Java: 11
+  Dependencies:
+    Spring Web
+  ```
+
+  ![Criação SaldoExtrato API](images/workshop-criacao-saldoextrato-api/criacao-projeto-saldoextrato.png)
+
+* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
+
+  ```
+  ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato(master*) » mvn spring-boot:run
+  [INFO] Scanning for projects...
+  [INFO]
+  [INFO] ---------------< br.com.impacta.fullstack:saldoextrato >----------------
+  [INFO] Building saldoextrato 0.0.1-SNAPSHOT
+  [INFO] --------------------------------[ jar ]---------------------------------
+  [INFO]
+  [INFO] >>> spring-boot-maven-plugin:2.4.2:run (default-cli) > test-compile @ saldoextrato >>>
+  [INFO]
+  [INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ saldoextrato ---
+  [INFO] Using 'UTF-8' encoding to copy filtered resources.
+  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
+  [INFO] Copying 1 resource
+  [INFO] Copying 0 resource
+  [INFO]
+  [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ saldoextrato ---
+  [INFO] Changes detected - recompiling the module!
+  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/target/classes
+  [INFO]
+  [INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ saldoextrato ---
+  [INFO] Using 'UTF-8' encoding to copy filtered resources.
+  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
+  [INFO] skip non existing resourceDirectory /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/src/test/resources
+  [INFO]
+  [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ saldoextrato ---
+  [INFO] Changes detected - recompiling the module!
+  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/target/test-classes
+  [INFO]
+  [INFO] <<< spring-boot-maven-plugin:2.4.2:run (default-cli) < test-compile @ saldoextrato <<<
+  [INFO]
+  [INFO]
+  [INFO] --- spring-boot-maven-plugin:2.4.2:run (default-cli) @ saldoextrato ---
+  [INFO] Attaching agents: []
+  OpenJDK 64-Bit Server VM warning: forcing TieredStopAtLevel to full optimization because JVMCI is enabled
+
+    .   ____          _            __ _ _
+   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+    '  |____| .__|_| |_|_| |_\__, | / / / /
+   =========|_|==============|___/=/_/_/_/
+   :: Spring Boot ::                (v2.4.2)
+
+  2021-01-19 08:51:55.947  INFO 35084 --- [           main] b.c.i.f.s.SaldoextratoApplication        : Starting SaldoextratoApplication using Java 11.0.7 on marcfleury with PID 35084 (/Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/target/classes started by vinny in /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato)
+  2021-01-19 08:51:55.948  INFO 35084 --- [           main] b.c.i.f.s.SaldoextratoApplication        : No active profile set, falling back to default profiles: default
+  2021-01-19 08:51:56.753  INFO 35084 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+  2021-01-19 08:51:56.763  INFO 35084 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+  2021-01-19 08:51:56.763  INFO 35084 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+  2021-01-19 08:51:56.819  INFO 35084 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+  2021-01-19 08:51:56.820  INFO 35084 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 831 ms
+  2021-01-19 08:51:56.968  INFO 35084 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+  2021-01-19 08:51:57.141  INFO 35084 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+  2021-01-19 08:51:57.151  INFO 35084 --- [           main] b.c.i.f.s.SaldoextratoApplication        : Started SaldoextratoApplication in 1.673 seconds (JVM running for 2.029)
+  ```
+  * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
+
+  ![Execução Debito API](images/workshop-criacao-saldoextrato-api/execucao-projeto-saldoextrato.png)
