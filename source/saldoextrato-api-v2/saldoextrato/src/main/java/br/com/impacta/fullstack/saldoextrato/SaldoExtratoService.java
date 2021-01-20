@@ -40,6 +40,7 @@ public class SaldoExtratoService {
         //Calcular saldo
         BigDecimal saldo = creditoSum.add(debitoSum);
         saldoExtrato.setSaldo(saldo);
+        System.out.println("saldo: " + saldo);
         return saldoExtrato;
     }
 
@@ -63,6 +64,7 @@ public class SaldoExtratoService {
         SaldoExtrato saldoExtrato = new SaldoExtrato();
         BigDecimal saldo = creditoSum.add(debitoSum);
         saldoExtrato.setSaldo(saldo);
+        System.out.println("saldo: " + saldo);
         return saldoExtrato;
     }
 
