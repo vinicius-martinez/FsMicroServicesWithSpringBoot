@@ -1,7 +1,7 @@
 FROM adoptopenjdk/openjdk11:ubi
 # Building
-# mvn package -f source/saldoextrato-api-v1/saldoextrato -DskipTests
-# docker build -f docker/Dockerfile.saldoextrato-api.v1 -t viniciusmartinez/saldoextrato-api:1.0  --build-arg JAR_FILE="source/saldoextrato-api-v1/saldoextrato/target/saldoextrato-0.0.2-SNAPSHOT.jar" .
+# mvn package -f source/saldoextrato-api-v2/saldoextrato -DskipTests
+# docker build -f docker/Dockerfile.saldoextrato-api.v2 -t viniciusmartinez/saldoextrato-api:2.0  --build-arg JAR_FILE="source/saldoextrato-api-v2/saldoextrato/target/saldoextrato-0.0.2-SNAPSHOT.jar" .
 # Running
 # docker run -it -p 8080:8080 viniciusmartinez/saldoextrato-api:2.0
 ARG JAR_FILE
