@@ -594,7 +594,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
   package br.com.impacta.fullstack.saldoextrato;
 
-  import ch.qos.logback.core.net.SyslogOutputStream;
   import org.springframework.beans.factory.annotation.Value;
   import org.springframework.http.ResponseEntity;
   import org.springframework.stereotype.Component;
