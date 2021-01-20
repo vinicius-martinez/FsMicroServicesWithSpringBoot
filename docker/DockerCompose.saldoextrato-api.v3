@@ -13,11 +13,15 @@ services:
     image: viniciusmartinez/credito-api:1.0
     ports:
       - "8081:8081"
+    depends_on:
+      - config
 
   debito:
     image: viniciusmartinez/debito-api:1.0
     ports:
       - "8082:8082"
+    depends_on:
+      - config
 
   saldoextrato:
     image: viniciusmartinez/saldoextrato-api:3.0
@@ -29,4 +33,4 @@ services:
       - config
     environment:
       spring_profiles_active: prod
-      config_host: config
+      CONFIG_HOST: config
