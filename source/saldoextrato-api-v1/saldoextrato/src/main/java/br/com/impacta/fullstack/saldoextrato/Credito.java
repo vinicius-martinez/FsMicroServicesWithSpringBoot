@@ -20,4 +20,5 @@ public class Credito implements Serializable {
     public void setCredito(BigDecimal credito) {
         this.credito = credito;
     }
+
 }

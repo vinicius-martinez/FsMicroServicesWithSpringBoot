@@ -128,26 +128,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
           this.credito = credito;
       }
 
-      @Override
-      public int hashCode() {
-          return super.hashCode();
-      }
-
-      @Override
-      public boolean equals(Object obj) {
-          return super.equals(obj);
-      }
-
-      @Override
-      protected Object clone() throws CloneNotSupportedException {
-          return super.clone();
-      }
-
-      @Override
-      public String toString() {
-          return super.toString();
-      }
-
   }
   ```
 
@@ -167,19 +147,20 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   @Component
   public class CreditoService {
 
-    private static final BigDecimal minValue = new BigDecimal(BigInteger.ONE);
-    private static final BigDecimal maxValue = new BigDecimal(BigInteger.TEN);
+      private static final BigDecimal minValue = new BigDecimal(BigInteger.ONE);
+      private static final BigDecimal maxValue = new BigDecimal(BigInteger.TEN);
 
-    public List<Credito> list(){
-        int numberOfCredit = new Random().nextInt(10) + 1;
-        List<Credito> creditoList = new ArrayList<Credito>(10);
-        for (int i = 0; i < numberOfCredit; i++) {
-            BigDecimal randomValue = minValue.add(new BigDecimal(Math.random()).multiply(maxValue.subtract(minValue))).setScale(1, BigDecimal.ROUND_HALF_UP);
-            Credito credito = new Credito(randomValue);
-            creditoList.add(credito);
-        }
-        return creditoList;
-    }
+      public List<Credito> list(){
+          int numberOfCredit = new Random().nextInt(10) + 1;
+          List<Credito> creditoList = new ArrayList<Credito>(10);
+          for (int i = 0; i < numberOfCredit; i++) {
+              BigDecimal randomValue = minValue.add(new BigDecimal(Math.random()).multiply(maxValue.subtract(minValue))).setScale(1, BigDecimal.ROUND_HALF_UP);
+              Credito credito = new Credito(randomValue);
+              creditoList.add(credito);
+          }
+          System.out.println("creditoList: " + creditoList);
+          return creditoList;
+      }
   }
   ```
 
@@ -192,6 +173,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   import org.springframework.web.bind.annotation.RequestMapping;
   import org.springframework.web.bind.annotation.RestController;
 
+  import java.net.InetAddress;
+  import java.net.UnknownHostException;
   import java.util.List;
 
   @RestController
@@ -205,8 +188,10 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       }
 
       @GetMapping
-      public List<Credito> list(){
-          return creditoService.list();
+      public List<Credito> list() throws UnknownHostException {
+          System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+          List<Credito> creditoList = creditoService.list();
+          return creditoList;
       }
 
   }
@@ -323,34 +308,12 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
         private BigDecimal debito;
 
-        public Debito(BigDecimal debito) {
+        public Debito() {
             super();
+        }
+
+        public Debito(BigDecimal debito) {
             this.debito = debito;
-        }
-
-        @Override
-        public int hashCode() {
-            return super.hashCode();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return super.equals(obj);
-        }
-
-        @Override
-        protected Object clone() throws CloneNotSupportedException {
-            return super.clone();
-        }
-
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-
-        @Override
-        protected void finalize() throws Throwable {
-            super.finalize();
         }
 
         public BigDecimal getDebito() {
@@ -361,7 +324,6 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
             this.debito = debito;
         }
     }
-
     ```
 
   * Criar classe **br.com.impacta.fullstack.debito.DebitoService**
@@ -391,6 +353,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
                 Debito debito = new Debito(randomValue);
                 debitoList.add(debito);
             }
+            System.out.println("debitoList: " + debitoList);
             return debitoList;
         }
     }
@@ -405,6 +368,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RestController;
 
+    import java.net.InetAddress;
+    import java.net.UnknownHostException;
     import java.util.List;
 
     @RestController
@@ -418,8 +383,10 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
         }
 
         @GetMapping
-        public List<Debito> list(){
-            return debitoService.list();
+        public List<Debito> list() throws UnknownHostException {
+            System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+            List<Debito> debitoList = debitoService.list();
+            return debitoList;
         }
     }
     ```
@@ -533,19 +500,22 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   public class Credito implements Serializable {
 
-    private BigDecimal credito;
+      private BigDecimal credito;
 
-    public Credito(BigDecimal credito) {
-        this.credito = credito;
-    }
+      public Credito() {}
 
-    public BigDecimal getCredito() {
-        return credito;
-    }
+      public Credito(BigDecimal credito) {
+          this.credito = credito;
+      }
 
-    public void setCredito(BigDecimal credito) {
-        this.credito = credito;
-    }
+      public BigDecimal getCredito() {
+          return credito;
+      }
+
+      public void setCredito(BigDecimal credito) {
+          this.credito = credito;
+      }
+
   }
   ```
 
@@ -559,18 +529,162 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   public class Debito implements Serializable {
 
-    private BigDecimal debito;
+      private BigDecimal debito;
 
-    public Debito(BigDecimal debito) {
-        this.debito = debito;
-    }
+      public Debito() {}
 
-    public BigDecimal getDebito() {
-        return debito;
-    }
+      public Debito(BigDecimal debito) {
+          this.debito = debito;
+      }
 
-    public void setDebito(BigDecimal debito) {
-        this.debito = debito;
-    }
+      public BigDecimal getDebito() {
+          return debito;
+      }
+
+      public void setDebito(BigDecimal debito) {
+          this.debito = debito;
+      }
+
   }
   ```
+
+* Criar classe **br.com.impacta.fullstack.saldoextrato.SaldoExtrato**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import java.math.BigDecimal;
+  import java.util.List;
+
+  public class SaldoExtrato {
+
+      private List<Credito> creditoList;
+      private List<Debito> debitoList;
+      private BigDecimal saldo;
+
+      public List<Debito> getDebitoList() {
+          return debitoList;
+      }
+
+      public void setDebitoList(List<Debito> debitoList) {
+          this.debitoList = debitoList;
+      }
+
+      public List<Credito> getCreditoList() {
+          return creditoList;
+      }
+
+      public void setCreditoList(List<Credito> creditoList) {
+          this.creditoList = creditoList;
+      }
+
+      public BigDecimal getSaldo() {
+          return saldo;
+      }
+
+      public void setSaldo(BigDecimal saldo) {
+          this.saldo = saldo;
+      }
+
+  }
+  ```
+
+* Criar classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoService**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import ch.qos.logback.core.net.SyslogOutputStream;
+  import org.springframework.beans.factory.annotation.Value;
+  import org.springframework.http.ResponseEntity;
+  import org.springframework.stereotype.Component;
+  import org.springframework.web.client.RestTemplate;
+
+  import java.math.BigDecimal;
+  import java.util.Arrays;
+  import java.util.List;
+
+  @Component
+  public class SaldoExtratoService {
+
+      @Value(value = "${CREDITO_API_URL}")
+      private String CREDITO_API_URL;
+
+      @Value(value = "${DEBITO_API_URL}")
+      private String DEBITO_API_URL;
+
+      public SaldoExtrato get(){
+          RestTemplate restTemplate = new RestTemplate();
+          //Get Credito
+          ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(CREDITO_API_URL, Credito[].class);
+          System.out.println("CREDITO_API_URL: " + CREDITO_API_URL);
+          List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
+          System.out.println("Creditos: " + creditoList);
+          SaldoExtrato saldoExtrato = new SaldoExtrato();
+          saldoExtrato.setCreditoList(creditoList);
+          BigDecimal creditoSum = creditoList.stream().map(Credito::getCredito).reduce(BigDecimal.ZERO, BigDecimal::add);
+          //Get Debito
+          ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(DEBITO_API_URL, Debito[].class);
+          System.out.println("DEBITO_API_URL: " + DEBITO_API_URL);
+          List<Debito> debitoList = Arrays.asList(debitoResponse.getBody());
+          System.out.println("Debitos: " + debitoList);
+          saldoExtrato.setDebitoList(debitoList);
+          BigDecimal debitoSum = debitoList.stream().map(Debito::getDebito).reduce(BigDecimal.ZERO, BigDecimal::add);
+          System.out.println("debitoSum: " + debitoSum);
+          //Calcular saldo
+          BigDecimal saldo = creditoSum.add(debitoSum);
+          saldoExtrato.setSaldo(saldo);
+          return saldoExtrato;
+      }
+  }
+  ```
+
+* Criar classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoController**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import org.springframework.web.bind.annotation.GetMapping;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  import org.springframework.web.bind.annotation.RestController;
+
+  import java.net.InetAddress;
+  import java.net.UnknownHostException;
+
+  @RestController
+  @RequestMapping(("/api/v1/saldoextrato"))
+  public class SaldoExtratoController {
+
+      private final SaldoExtratoService saldoExtratoService;
+
+      public SaldoExtratoController(SaldoExtratoService saldoExtratoService) {
+          this.saldoExtratoService = saldoExtratoService;
+      }
+
+      @GetMapping
+      public SaldoExtrato get() throws UnknownHostException {
+          System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+          SaldoExtrato saldoExtrato = saldoExtratoService.get();
+          return saldoExtrato;
+      }
+
+  }
+  ```
+
+* Ajustes na configuração de porta no arquivo **src/main/resources/application.properties**:
+
+    ```
+    CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
+    DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
+    ```
+
+  * Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
+
+    ```
+    mvn spring:boot run
+
+    -- outra aba do terminal/postman/httpie/curl/etc
+    http :8080/api/v1/saldoextrato
+    ```
+
+    ![Execução Debito API](images/workshop-criacao-debito-api/execucao-teste-debito.png)

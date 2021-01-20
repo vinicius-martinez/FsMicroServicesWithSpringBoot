@@ -32,4 +32,5 @@ public class SaldoExtrato {
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
+
 }

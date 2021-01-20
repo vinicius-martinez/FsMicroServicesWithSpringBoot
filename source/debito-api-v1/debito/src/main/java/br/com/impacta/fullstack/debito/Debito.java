@@ -7,8 +7,11 @@ public class Debito implements Serializable {
 
     private BigDecimal debito;
 
-    public Debito(BigDecimal debito) {
+    public Debito() {
         super();
+    }
+
+    public Debito(BigDecimal debito) {
         this.debito = debito;
     }
 

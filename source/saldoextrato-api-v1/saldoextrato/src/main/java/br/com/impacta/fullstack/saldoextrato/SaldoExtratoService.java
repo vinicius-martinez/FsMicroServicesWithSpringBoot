@@ -42,4 +42,5 @@ public class SaldoExtratoService {
         saldoExtrato.setSaldo(saldo);
         return saldoExtrato;
     }
+
 }

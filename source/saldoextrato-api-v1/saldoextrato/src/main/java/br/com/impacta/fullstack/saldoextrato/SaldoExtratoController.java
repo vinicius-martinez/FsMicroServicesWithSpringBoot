@@ -23,4 +23,5 @@ public class SaldoExtratoController {
         SaldoExtrato saldoExtrato = saldoExtratoService.get();
         return saldoExtrato;
     }
+
 }
