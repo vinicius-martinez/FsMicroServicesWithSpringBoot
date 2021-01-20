@@ -672,18 +672,77 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
 * Ajustes na configuração de porta no arquivo **src/main/resources/application.properties**:
 
-    ```
-    CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
-    DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
-    ```
+  ```
+  CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
+  DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
+  ```
 
-  * Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
+* Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
 
-    ```
-    mvn spring:boot run
+  ```
+  mvn spring:boot run
 
-    -- outra aba do terminal/postman/httpie/curl/etc
-    http :8080/api/v1/saldoextrato
-    ```
+  -- outra aba do terminal/postman/httpie/curl/etc
+  http :8080/api/v1/saldoextrato
+  ```
 
-    ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-teste-saldoextrato.png)
+  ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-teste-saldoextrato.png)
+
+### 4 - Criação SaldoExtrato BFF API <a name="workshop-criacao-saldoextrato-bff-api">
+
+* Editar a classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoService** adicionando o método **getBff()**
+
+  ```
+  public SaldoExtrato getBff(){
+    RestTemplate restTemplate = new RestTemplate();
+    //Get Credito
+    ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(CREDITO_API_URL, Credito[].class);
+    System.out.println("CREDITO_API_URL: " + CREDITO_API_URL);
+    List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
+    System.out.println("Creditos: " + creditoList);
+    BigDecimal creditoSum = creditoList.stream().map(Credito::getCredito).reduce(BigDecimal.ZERO, BigDecimal::add);
+    System.out.println("creditoSum: " + creditoSum);
+    //Get Debito
+    ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(DEBITO_API_URL, Debito[].class);
+    System.out.println("DEBITO_API_URL: " + DEBITO_API_URL);
+    List<Debito> debitoList = Arrays.asList(debitoResponse.getBody());
+    System.out.println("Debitos: " + debitoList);
+    BigDecimal debitoSum = debitoList.stream().map(Debito::getDebito).reduce(BigDecimal.ZERO, BigDecimal::add);
+    System.out.println("debitoSum: " + debitoSum);
+    //Calcular saldo
+    SaldoExtrato saldoExtrato = new SaldoExtrato();
+    BigDecimal saldo = creditoSum.add(debitoSum);
+    saldoExtrato.setSaldo(saldo);
+    System.out.println("saldo: " + saldo);
+    return saldoExtrato;
+  }
+  ```
+
+* Editar a classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoController** adicionando o método **getBff()**
+
+  ```
+  @GetMapping
+  @RequestMapping("/mobile")
+  public SaldoExtrato getBff() throws UnknownHostException {
+      System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+      SaldoExtrato saldoExtrato = saldoExtratoService.getBff();
+      return saldoExtrato;
+  }
+  ```
+
+* Adicione a propriedade *spring.jackson.default-property-inclusion* com valor *null* no arquivo **application.properties**
+
+  ```
+  spring.jackson.default-property-inclusion = non_null
+  ```
+
+* Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
+
+  ```
+  mvn spring:boot run
+
+  -- outra aba do terminal/postman/httpie/curl/etc
+  http :8080/api/v1/saldoextrato/mobile
+  ```
+
+  ![Execução SaldoExtrato BFF API](images/workshop-criacao-saldoextrato-bff-api/execucao-teste-saldoextratobff.png)
