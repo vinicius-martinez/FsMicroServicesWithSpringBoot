@@ -686,4 +686,4 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     http :8080/api/v1/saldoextrato
     ```
 
-    ![Execução Debito API](images/workshop-criacao-debito-api/execucao-teste-debito.png)
+    ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-teste-saldoextrato.png)
