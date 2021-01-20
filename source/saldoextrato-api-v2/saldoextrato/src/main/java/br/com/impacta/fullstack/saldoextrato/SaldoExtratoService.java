@@ -28,6 +28,7 @@ public class SaldoExtratoService {
         SaldoExtrato saldoExtrato = new SaldoExtrato();
         saldoExtrato.setCreditoList(creditoList);
         BigDecimal creditoSum = creditoList.stream().map(Credito::getCredito).reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("creditoSum: " + creditoSum);
         //Get Debito
         ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(DEBITO_API_URL, Debito[].class);
         System.out.println("DEBITO_API_URL: " + DEBITO_API_URL);
@@ -50,6 +51,7 @@ public class SaldoExtratoService {
         List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
         System.out.println("Creditos: " + creditoList);
         BigDecimal creditoSum = creditoList.stream().map(Credito::getCredito).reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("creditoSum: " + creditoSum);
         //Get Debito
         ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(DEBITO_API_URL, Debito[].class);
         System.out.println("DEBITO_API_URL: " + DEBITO_API_URL);
