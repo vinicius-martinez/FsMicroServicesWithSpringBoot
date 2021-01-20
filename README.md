@@ -15,6 +15,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 1. [Criação Debito API](#workshop-criacao-debito-api)
 2. [Criação SaldoExtrato API](#workshop-criacao-saldoextrato-api)
 3. [Criação SaldoExtrato BFF API](#workshop-criacao-saldoextrato-bff-api)
+4. [Criação Config Server](#workshop-criacao-config-server)
 
 ## Implementação
 
@@ -408,7 +409,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
     ![Execução Debito API](images/workshop-criacao-debito-api/execucao-teste-debito.png)
 
-### 3 - Criação SaldoExtrato API <a name="workshop-criacao-saldoextrato-api">
+### 2 - Criação SaldoExtrato API <a name="workshop-criacao-saldoextrato-api">
 
 * Acesse o [Spring Boot Initializer](https://start.spring.io/) e gere um projeto com as seguintes informações:
 
@@ -688,7 +689,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-teste-saldoextrato.png)
 
-### 4 - Criação SaldoExtrato BFF API <a name="workshop-criacao-saldoextrato-bff-api">
+### 3 - Criação SaldoExtrato BFF API <a name="workshop-criacao-saldoextrato-bff-api">
 
 * Editar a classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoService** adicionando os métodos **getBff()** e **calculateSaldo**
 
@@ -796,3 +797,88 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
 
   ![Execução SaldoExtrato BFF API](images/workshop-criacao-saldoextrato-bff-api/execucao-teste-saldoextratobff.png)
+
+### 4 - Criação Config Server <a name="workshop-criacao-config-server">
+
+* Acesse o [Spring Boot Initializer](https://start.spring.io/) e gere um projeto com as seguintes informações:
+
+  ```
+  Project: Maven
+  Language: Java
+  Spring Boot: 2.4.2
+  Project Metadata
+    Group: br.com.impacta.fullstack
+    artifact: configserver
+    name: configserver
+    Package Name: br.com.impacta.fullstack.configserver
+    Packaging: jar
+    Java: 11
+  Dependencies:
+    Config Server
+  ```
+
+  ![Criação Config Server](images/workshop-criacao-config-server/criacao-projeto-configserver.png)
+
+* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
+
+  ```
+  ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver(master*) » mvn spring-boot:run
+  [INFO] Scanning for projects...
+  [INFO]
+  [INFO] ---------------< br.com.impacta.fullstack:configserver >----------------
+  [INFO] Building configserver 0.0.1-SNAPSHOT
+  [INFO] --------------------------------[ jar ]---------------------------------
+  [INFO]
+  [INFO] >>> spring-boot-maven-plugin:2.4.2:run (default-cli) > test-compile @ configserver >>>
+  [INFO]
+  [INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ configserver ---
+  [INFO] Using 'UTF-8' encoding to copy filtered resources.
+  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
+  [INFO] Copying 1 resource
+  [INFO] Copying 0 resource
+  [INFO]
+  [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ configserver ---
+  [INFO] Changes detected - recompiling the module!
+  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/target/classes
+  [INFO]
+  [INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ configserver ---
+  [INFO] Using 'UTF-8' encoding to copy filtered resources.
+  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
+  [INFO] skip non existing resourceDirectory /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/src/test/resources
+  [INFO]
+  [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ configserver ---
+  [INFO] Changes detected - recompiling the module!
+  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/target/test-classes
+  [INFO]
+  [INFO] <<< spring-boot-maven-plugin:2.4.2:run (default-cli) < test-compile @ configserver <<<
+  [INFO]
+  [INFO]
+  [INFO] --- spring-boot-maven-plugin:2.4.2:run (default-cli) @ configserver ---
+  [INFO] Attaching agents: []
+  OpenJDK 64-Bit Server VM warning: forcing TieredStopAtLevel to full optimization because JVMCI is enabled
+
+    .   ____          _            __ _ _
+   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+    '  |____| .__|_| |_|_| |_\__, | / / / /
+   =========|_|==============|___/=/_/_/_/
+   :: Spring Boot ::                (v2.4.2)
+
+  2021-01-20 09:52:41.732  INFO 2673 --- [           main] b.c.i.f.c.ConfigserverApplication        : Starting ConfigserverApplication using Java 11.0.7 on marcfleury with PID 2673 (/Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/target/classes started by vinny in /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver)
+  2021-01-20 09:52:41.734  INFO 2673 --- [           main] b.c.i.f.c.ConfigserverApplication        : No active profile set, falling back to default profiles: default
+  2021-01-20 09:52:42.930  INFO 2673 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=5d126ee3-1e57-37c9-ba7b-c3609c50757a
+  2021-01-20 09:52:43.420  INFO 2673 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+  2021-01-20 09:52:43.430  INFO 2673 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+  2021-01-20 09:52:43.430  INFO 2673 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+  2021-01-20 09:52:43.561  INFO 2673 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+  2021-01-20 09:52:43.561  INFO 2673 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1768 ms
+  2021-01-20 09:52:43.894  INFO 2673 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+  2021-01-20 09:52:44.190  INFO 2673 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+  2021-01-20 09:52:44.269  INFO 2673 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+  2021-01-20 09:52:44.298  INFO 2673 --- [           main] b.c.i.f.c.ConfigserverApplication        : Started ConfigserverApplication in 3.045 seconds (JVM running for 3.429)
+  ```
+
+    * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
+
+  ![Execução Config Server](images/workshop-criacao-config-server/execucao-projeto-configserver.png)
