@@ -22,6 +22,7 @@ public class DebitoService {
             Debito debito = new Debito(randomValue);
             debitoList.add(debito);
         }
+        System.out.println("debitoList: " + debitoList);
         return debitoList;
     }
 }

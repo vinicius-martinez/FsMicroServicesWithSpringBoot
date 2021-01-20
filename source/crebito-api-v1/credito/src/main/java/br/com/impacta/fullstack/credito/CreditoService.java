@@ -22,6 +22,7 @@ public class CreditoService {
             Credito credito = new Credito(randomValue);
             creditoList.add(credito);
         }
+        System.out.println("creditoList: " + creditoList);
         return creditoList;
     }
 }

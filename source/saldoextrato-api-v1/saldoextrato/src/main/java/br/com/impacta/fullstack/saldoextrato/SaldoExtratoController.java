@@ -4,6 +4,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @RestController
 @RequestMapping(("/api/v1/saldoextrato"))
 public class SaldoExtratoController {
@@ -15,7 +18,8 @@ public class SaldoExtratoController {
     }
 
     @GetMapping
-    public SaldoExtrato get(){
+    public SaldoExtrato get() throws UnknownHostException {
+        System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
         SaldoExtrato saldoExtrato = saldoExtratoService.get();
         return saldoExtrato;
     }

@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 @RestController
@@ -17,7 +19,9 @@ public class DebitoController {
     }
 
     @GetMapping
-    public List<Debito> list(){
-        return debitoService.list();
+    public List<Debito> list() throws UnknownHostException {
+        System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+        List<Debito> debitoList = debitoService.list();
+        return debitoList;
     }
 }
