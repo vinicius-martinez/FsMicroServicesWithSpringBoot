@@ -100,7 +100,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   ![Execução Credito API](images/workshop-criacao-credito-api/execucao-projeto-credito.png)
 
-* Criar da classe **br.com.impacta.fullstack.credito.Credito**
+* Criar classe **br.com.impacta.fullstack.credito.Credito**
 
   ```
   package br.com.impacta.fullstack.credito;
@@ -151,7 +151,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   }
   ```
 
-* Criar da classe **br.com.impacta.fullstack.credito.CreditoService**
+* Criar classe **br.com.impacta.fullstack.credito.CreditoService**
 
   ```
   package br.com.impacta.fullstack.credito;
@@ -183,7 +183,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   }
   ```
 
-* Criar da classe **br.com.impacta.fullstack.credito.CreditoController**
+* Criar classe **br.com.impacta.fullstack.credito.CreditoController**
 
   ```
   package br.com.impacta.fullstack.credito;
@@ -311,7 +311,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
     ![Execução Debito API](images/workshop-criacao-debito-api/execucao-projeto-debito.png)
 
-  * Criar da classe **br.com.impacta.fullstack.credito.Debito**
+  * Criar classe **br.com.impacta.fullstack.debito.Debito**
 
     ```
     package br.com.impacta.fullstack.debito;
@@ -364,7 +364,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
     ```
 
-  * Criar da classe **br.com.impacta.fullstack.credito.DebitoService**
+  * Criar classe **br.com.impacta.fullstack.debito.DebitoService**
 
     ```
     package br.com.impacta.fullstack.debito;
@@ -396,7 +396,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     }
     ```
 
-  * Criar da classe **br.com.impacta.fullstack.credito.DebitoController**
+  * Criar classe **br.com.impacta.fullstack.debito.DebitoController**
 
     ```
     package br.com.impacta.fullstack.debito;
@@ -521,4 +521,56 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
   * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
 
-  ![Execução Debito API](images/workshop-criacao-saldoextrato-api/execucao-projeto-saldoextrato.png)
+  ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-projeto-saldoextrato.png)
+
+* Criar classe **br.com.impacta.fullstack.saldoextrato.Credito**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import java.io.Serializable;
+  import java.math.BigDecimal;
+
+  public class Credito implements Serializable {
+
+    private BigDecimal credito;
+
+    public Credito(BigDecimal credito) {
+        this.credito = credito;
+    }
+
+    public BigDecimal getCredito() {
+        return credito;
+    }
+
+    public void setCredito(BigDecimal credito) {
+        this.credito = credito;
+    }
+  }
+  ```
+
+* Criar classe **br.com.impacta.fullstack.saldoextrato.Debito**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import java.io.Serializable;
+  import java.math.BigDecimal;
+
+  public class Debito implements Serializable {
+
+    private BigDecimal debito;
+
+    public Debito(BigDecimal debito) {
+        this.debito = debito;
+    }
+
+    public BigDecimal getDebito() {
+        return debito;
+    }
+
+    public void setDebito(BigDecimal debito) {
+        this.debito = debito;
+    }
+  }
+  ```
