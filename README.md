@@ -19,6 +19,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 5. [Criação Service Discovery Server](#workshop-service-discovery-server)
 6. [Habilitar Circuit Breaker](#workshop-circuit-breaker)
 7. [Habilitar Tracing](#workshop-tracing)
+8. [Habilitar Monitoramento](#workshop-monitoramento)
 
 ## Implementação
 
@@ -1668,7 +1669,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   }
   ```
 
-### 7 - Criação Credito API <a name="workshop-tracing">
+### 7 - Habilitar Tracing <a name="workshop-tracing">
 
 * Alterar o arquivo **pom.xml** do projeto **SaldoExtrato** com o seguinte conteúdo:
 
@@ -1920,3 +1921,106 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     -p 9411:9411 \
     openzipkin/zipkin
   ```
+
+### 8 - Habilitar Momitoramento <a name="workshop-monitoramento">
+
+* Inclua a extensão do *micrometer-registry-prometheus* no arquivo **pom.xml**
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<parent>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-parent</artifactId>
+  		<version>2.3.7.RELEASE</version>
+  		<!--version>2.4.2</version-->
+  		<relativePath/>
+  	</parent>
+  	<groupId>br.com.impacta.fullstack</groupId>
+  	<artifactId>saldoextrato</artifactId>
+  	<version>0.0.7-SNAPSHOT</version>
+  	<name>saldoextrato</name>
+  	<description>Demo project for Spring Boot</description>
+
+  	<properties>
+  		<java.version>11</java.version>
+  		<!--<spring.cloud-version>2020.0.0</spring.cloud-version-->
+  		<spring.cloud-version>Hoxton.SR9</spring.cloud-version>
+  	</properties>
+
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-actuator</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-config</artifactId>
+  		</dependency>
+  		<!--dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+  		</dependency-->
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-zipkin</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>io.micrometer</groupId>
+  			<artifactId>micrometer-registry-prometheus</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  	</dependencies>
+
+  	<dependencyManagement>
+  		<dependencies>
+  			<dependency>
+  				<groupId>org.springframework.cloud</groupId>
+  				<artifactId>spring-cloud-dependencies</artifactId>
+  				<version>${spring.cloud-version}</version>
+  				<type>pom</type>
+  				<scope>import</scope>
+  			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
+
+  	<build>
+  		<plugins>
+  			<plugin>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-maven-plugin</artifactId>
+  			</plugin>
+  		</plugins>
+  	</build>
+
+  </project>
+  ```
+
+* Inicialize o serviço do *Prometheus:*
+
+  ```
+  ./prometheus --config.file=prometheus.yml
+  http://localhost:9090/
+  brew services start grafana
+  http://localhost:3000/
+  ```
+
+* Valide as informações no console gráfico: *http://localhost:9090*  
