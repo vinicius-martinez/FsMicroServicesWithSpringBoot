@@ -18,6 +18,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 4. [Criação Config Server](#workshop-criacao-config-server)
 5. [Criação Service Discovery Server](#workshop-service-discovery-server)
 6. [Habilitar Circuit Breaker](#workshop-circuit-breaker)
+7. [Habilitar Tracing](#workshop-tracing)
 
 ## Implementação
 
@@ -1665,4 +1666,151 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       }
 
   }
+  ```
+
+### 7 - Criação Credito API <a name="workshop-tracing">
+
+* Alterar o arquivo **pom.xml** do projeto **SaldoExtrato** com o seguinte conteúdo:
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<parent>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-parent</artifactId>
+  		<version>2.3.7.RELEASE</version>
+  		<!--version>2.4.2</version-->
+  		<relativePath/>
+  	</parent>
+  	<groupId>br.com.impacta.fullstack</groupId>
+  	<artifactId>saldoextrato</artifactId>
+  	<version>0.0.6-SNAPSHOT</version>
+  	<name>saldoextrato</name>
+  	<description>Demo project for Spring Boot</description>
+
+  	<properties>
+  		<java.version>11</java.version>
+  		<!--<spring.cloud-version>2020.0.0</spring.cloud-version-->
+  		<spring.cloud-version>Hoxton.SR9</spring.cloud-version>
+  	</properties>
+
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-actuator</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-config</artifactId>
+  		</dependency>
+  		<!--dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+  		</dependency-->
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-zipkin</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  	</dependencies>
+
+  	<dependencyManagement>
+  		<dependencies>
+  			<dependency>
+  				<groupId>org.springframework.cloud</groupId>
+  				<artifactId>spring-cloud-dependencies</artifactId>
+  				<version>${spring.cloud-version}</version>
+  				<type>pom</type>
+  				<scope>import</scope>
+  			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
+
+  	<build>
+  		<plugins>
+  			<plugin>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-maven-plugin</artifactId>
+  			</plugin>
+  		</plugins>
+  	</build>
+
+  </project>
+  ```
+
+* Modificar a classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoController** com o seguinte conteúdo:
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import brave.Span;
+  import brave.Tracer;
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+  import org.springframework.web.bind.annotation.GetMapping;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  import org.springframework.web.bind.annotation.RestController;
+
+  import java.net.InetAddress;
+  import java.net.UnknownHostException;
+
+  @RestController
+  @RequestMapping("/api/v1/saldoextrato")
+  @EnableCircuitBreaker
+  public class SaldoExtratoController {
+
+      private final SaldoExtratoService saldoExtratoService;
+
+      @Autowired
+      private Tracer tracer;
+
+      public SaldoExtratoController(SaldoExtratoService saldoExtratoService) {
+          this.saldoExtratoService = saldoExtratoService;
+      }
+
+      @GetMapping
+      public SaldoExtrato get() throws UnknownHostException {
+          Span newSpan = tracer.nextSpan().name("saldoextrato").start();
+          System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+          SaldoExtrato saldoExtrato = saldoExtratoService.get();
+          newSpan.finish();
+          return saldoExtrato;
+      }
+
+      @GetMapping
+      @RequestMapping("/mobile")
+      public SaldoExtrato getBff() throws UnknownHostException {
+          System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+          SaldoExtrato saldoExtrato = saldoExtratoService.getBff();
+          return saldoExtrato;
+      }
+
+  }
+  ```
+
+* Inicialize o serviço do *Zipkin*:
+
+  ```
+  docker run -it \
+    --name trace \
+    -p 9411:9411 \
+    openzipkin/zipkin
   ```
