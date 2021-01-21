@@ -16,6 +16,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 2. [Criação SaldoExtrato API](#workshop-criacao-saldoextrato-api)
 3. [Criação SaldoExtrato BFF API](#workshop-criacao-saldoextrato-bff-api)
 4. [Criação Config Server](#workshop-criacao-config-server)
+5. [Criação API Gateway]
 
 ## Implementação
 
@@ -1066,5 +1067,3 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   http :8080/api/v1/saldoextrato/mobile
   http :8080/api/v1/saldoextrato
   ```
-
-* Por fim para executar a aplicação
