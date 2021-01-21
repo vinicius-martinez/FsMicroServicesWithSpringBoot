@@ -17,6 +17,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 3. [Criação SaldoExtrato BFF API](#workshop-criacao-saldoextrato-bff-api)
 4. [Criação Config Server](#workshop-criacao-config-server)
 5. [Criação Service Discovery Server](#workshop-service-discovery-server)
+6. [Habilitar Circuit Breaker](#workshop-circuit-breaker)
 
 ## Implementação
 
@@ -1447,6 +1448,220 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
           BigDecimal saldo = creditoSum.add(debitoSum);
           System.out.println("saldo: " + saldo);
           return saldo;
+      }
+
+  }
+  ```
+
+### 6 - Habilitar Circuit Breaker <a name="workshop-circuit-breaker">
+
+* Alterar o arquivo **pom.xml** do projeto **SaldoExtrato**:
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<parent>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-parent</artifactId>
+  		<version>2.3.7.RELEASE</version>
+  		<!--version>2.4.2</version-->
+  		<relativePath/>
+  	</parent>
+  	<groupId>br.com.impacta.fullstack</groupId>
+  	<artifactId>saldoextrato</artifactId>
+  	<version>0.0.5-SNAPSHOT</version>
+  	<name>saldoextrato</name>
+  	<description>Demo project for Spring Boot</description>
+
+  	<properties>
+  		<java.version>11</java.version>
+  		<!--<spring.cloud-version>2020.0.0</spring.cloud-version-->
+  		<spring.cloud-version>Hoxton.SR9</spring.cloud-version>
+  	</properties>
+
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-actuator</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-config</artifactId>
+  		</dependency>
+  		<!--dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+  		</dependency-->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  	</dependencies>
+
+  	<dependencyManagement>
+  		<dependencies>
+  			<dependency>
+  				<groupId>org.springframework.cloud</groupId>
+  				<artifactId>spring-cloud-dependencies</artifactId>
+  				<version>${spring.cloud-version}</version>
+  				<type>pom</type>
+  				<scope>import</scope>
+  			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
+
+  	<build>
+  		<plugins>
+  			<plugin>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-maven-plugin</artifactId>
+  			</plugin>
+  		</plugins>
+  	</build>
+
+  </project>
+  ```
+
+* Incluir endpoints gerenciamentodo *Actuator* no arquivo **application.properties**:
+
+  ```
+  # export spring_profiles_active=dev
+  # export CONFIG_HOST=localhost
+  spring.jackson.default-property-inclusion = non_null
+  eureka.client.serviceUrl.defaultZone = http://localhost:8761/eureka/
+  spring.application.name=saldoextrato
+  management.endpoints.web.exposure.include=*
+  ```
+
+* Alterar a classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoApplicationController**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import org.springframework.boot.SpringApplication;
+  import org.springframework.boot.autoconfigure.SpringBootApplication;
+  import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+
+  @SpringBootApplication
+  @EnableCircuitBreaker
+  public class SaldoExtratoApplication {
+
+  	public static void main(String[] args) {
+  		SpringApplication.run(SaldoExtratoApplication.class, args);
+  	}
+
+  }
+  ```
+
+* Alterar a classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoService**
+
+  ```
+  package br.com.impacta.fullstack.saldoextrato;
+
+  import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.cloud.client.ServiceInstance;
+  import org.springframework.cloud.client.discovery.DiscoveryClient;
+  import org.springframework.http.ResponseEntity;
+  import org.springframework.stereotype.Component;
+  import org.springframework.web.client.RestTemplate;
+
+  import java.math.BigDecimal;
+  import java.util.Arrays;
+  import java.util.List;
+
+  @Component
+  public class SaldoExtratoService {
+
+      //@Value("${CREDITO_API_URL}")
+      //private String CREDITO_API_URL;
+
+      //@Value("${DEBITO_API_URL}")
+      //private String DEBITO_API_URL;
+
+      @Autowired
+      private DiscoveryClient discoveryClient;
+
+      public SaldoExtrato get(){
+          RestTemplate restTemplate = new RestTemplate();
+          //Get Credito
+          ServiceInstance serviceInstance = discoveryClient.getInstances("credito-v2").get(0);
+          String creditoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/credito";
+          ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(creditoUrl, Credito[].class);
+          System.out.println("CREDITO_API_URL: " + creditoUrl);
+          List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
+          System.out.println("Creditos: " + creditoList);
+          SaldoExtrato saldoExtrato = new SaldoExtrato();
+          saldoExtrato.setCreditoList(creditoList);
+          //Get Debito
+          serviceInstance = discoveryClient.getInstances("debito-v2").get(0);
+          String debitoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/debito";
+          ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(debitoUrl, Debito[].class);
+          System.out.println("DEBITO_API_URL: " + debitoUrl);
+          List<Debito> debitoList = Arrays.asList(debitoResponse.getBody());
+          System.out.println("Debitos: " + debitoList);
+          saldoExtrato.setDebitoList(debitoList);
+          //Calcular saldo
+          BigDecimal saldo = calculateSaldo(creditoList, debitoList);
+          saldoExtrato.setSaldo(saldo);
+          System.out.println("saldo: " + saldo);
+          return saldoExtrato;
+      }
+
+      @HystrixCommand(fallbackMethod = "fallback")
+      public SaldoExtrato getBff(){
+          RestTemplate restTemplate = new RestTemplate();
+          //Get Credito
+          ServiceInstance serviceInstance = discoveryClient.getInstances("credito-v2").get(0);
+          String creditoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/credito";
+          ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(creditoUrl, Credito[].class);
+          System.out.println("CREDITO_API_URL: " + creditoUrl);
+          List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
+          System.out.println("Creditos: " + creditoList);
+          //Get Debito
+          serviceInstance = discoveryClient.getInstances("debito-v2").get(0);
+          String debitoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/debito";
+          ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(debitoUrl, Debito[].class);
+          System.out.println("DEBITO_API_URL: " + debitoUrl);
+          List<Debito> debitoList = Arrays.asList(debitoResponse.getBody());
+          System.out.println("Debitos: " + debitoList);
+          //Calcular saldo
+          SaldoExtrato saldoExtrato = new SaldoExtrato();
+          BigDecimal saldo = calculateSaldo(creditoList, debitoList);
+          saldoExtrato.setSaldo(saldo);
+          System.out.println("saldo: " + saldo);
+          return saldoExtrato;
+      }
+
+      private BigDecimal calculateSaldo(List<Credito> creditoList, List<Debito> debitoList) {
+          BigDecimal creditoSum = creditoList.stream().map(Credito::getCredito).reduce(BigDecimal.ZERO, BigDecimal::add);
+          System.out.println("creditoSum: " + creditoSum);
+          BigDecimal debitoSum = debitoList.stream().map(Debito::getDebito).reduce(BigDecimal.ZERO, BigDecimal::add);
+          System.out.println("debitoSum: " + debitoSum);
+          BigDecimal saldo = creditoSum.add(debitoSum);
+          System.out.println("saldo: " + saldo);
+          return saldo;
+      }
+
+      public SaldoExtrato fallback(){
+          SaldoExtrato saldoExtratoFallBack = new SaldoExtrato();
+          saldoExtratoFallBack.setSaldo(new BigDecimal(0));
+          return saldoExtratoFallBack;
       }
 
   }
