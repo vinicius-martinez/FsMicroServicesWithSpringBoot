@@ -882,3 +882,189 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
 
   ![Execução Config Server](images/workshop-criacao-config-server/execucao-projeto-configserver.png)
+
+* Inclua a *Annotation @EnableConfigServer* na classe **br.com.impacta.fullstack.configserver.ConfigServerApplication**
+
+  ```
+  package br.com.impacta.fullstack.configserver;
+
+  import org.springframework.boot.SpringApplication;
+  import org.springframework.boot.autoconfigure.SpringBootApplication;
+  import org.springframework.cloud.config.server.EnableConfigServer;
+
+  @EnableConfigServer
+  @SpringBootApplication
+  public class ConfigServerApplication {
+
+  	public static void main(String[] args) {
+  		SpringApplication.run(ConfigServerApplication.class, args);
+  	}
+
+  }
+  ```
+
+* Altere o arquivo **pom.xml** incluindo as dependências necessárias:
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<parent>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-parent</artifactId>
+  		<version>2.4.2</version>
+  		<relativePath/> <!-- lookup parent from repository -->
+  	</parent>
+  	<groupId>br.com.impacta.fullstack</groupId>
+  	<artifactId>configserver</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<name>configserver</name>
+  	<description>Demo project for Spring Boot</description>
+  	<properties>
+  		<java.version>11</java.version>
+  		<spring-cloud.version>2020.0.0</spring-cloud.version>
+  	</properties>
+
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-config-server</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  	</dependencies>
+
+  	<dependencyManagement>
+  		<dependencies>
+  			<dependency>
+  				<groupId>org.springframework.cloud</groupId>
+  				<artifactId>spring-cloud-dependencies</artifactId>
+  				<version>${spring-cloud.version}</version>
+  				<type>pom</type>
+  				<scope>import</scope>
+  			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
+
+  	<build>
+  		<plugins>
+  			<plugin>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-maven-plugin</artifactId>
+  			</plugin>
+  		</plugins>
+  	</build>
+  	<repositories>
+  		<repository>
+  			<id>spring-milestones</id>
+  			<name>Spring Milestones</name>
+  			<url>https://repo.spring.io/milestone</url>
+  		</repository>
+  	</repositories>
+
+  </project>
+  ```
+
+* Por fim altere o arquivo **application.properties** adicionando o seguinte conteúdo:
+
+  ```
+  server.port=8888
+  spring.application.name=configserver
+  spring.cloud.config.server.git.uri=https://github.com/vinicius-martinez/FsConfigServer
+  ```
+
+* No projeto **SaldoExtrato** modique o arquivo **pom.xml** adicionando as dependências para utilização do *Config Server*:
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<parent>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-parent</artifactId>
+  		<version>2.4.2</version>
+  		<relativePath/>
+  	</parent>
+  	<groupId>br.com.impacta.fullstack</groupId>
+  	<artifactId>saldoextrato</artifactId>
+  	<version>0.0.3-SNAPSHOT</version>
+  	<name>saldoextrato</name>
+  	<description>Demo project for Spring Boot</description>
+
+  	<properties>
+  		<java.version>11</java.version>
+  		<spring.cloud-version>2020.0.0</spring.cloud-version>
+  	</properties>
+
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-config</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  	</dependencies>
+
+  	<dependencyManagement>
+  		<dependencies>
+  			<dependency>
+  				<groupId>org.springframework.cloud</groupId>
+  				<artifactId>spring-cloud-dependencies</artifactId>
+  				<version>${spring.cloud-version}</version>
+  				<type>pom</type>
+  				<scope>import</scope>
+  			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
+
+  	<build>
+  		<plugins>
+  			<plugin>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-maven-plugin</artifactId>
+  			</plugin>
+  		</plugins>
+  	</build>
+
+  </project>
+  ```
+
+* Ainda no projeto *SaldoExtrato* crie um arquivo chamado **bootstrap.properties** com o seguinte conteúdo:
+
+  ```
+  spring.application.name=saldoextrato
+  spring.cloud.config.uri=http://${CONFIG_HOST}:8888
+  management.endpoints.web.exposure.include=refresh
+  ```
+
+
+* Para inicializar a aplicação **SaldoExtrato** corretamente, será necessário incluir duas informações adicionais: *host* do *Config Server* e *profile* da aplicação:
+
+  ```
+  export spring_profiles_active=dev
+  export CONFIG_HOST=localhost
+
+  mvn spring:boot run
+
+  -- outra aba do terminal/postman/httpie/curl/etc
+  http :8080/api/v1/saldoextrato/mobile
+  http :8080/api/v1/saldoextrato
+  ```
+
+* Por fim para executar a aplicação
