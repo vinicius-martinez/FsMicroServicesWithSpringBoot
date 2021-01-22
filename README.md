@@ -44,7 +44,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   ![Criação Credito API](images/workshop-criacao-credito-api/criacao-projeto-credito.png)
 
-* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
+* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot: run*:
 
   ```
   ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/crebito-api-v1/credito(master*) » mvn spring-boot:run
@@ -1922,7 +1922,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     openzipkin/zipkin
   ```
 
-### 8 - Habilitar Momitoramento <a name="workshop-monitoramento">
+### 8 - Habilitar Monitoramento <a name="workshop-monitoramento">
 
 * Inclua a extensão do *micrometer-registry-prometheus* no arquivo **pom.xml**
 
