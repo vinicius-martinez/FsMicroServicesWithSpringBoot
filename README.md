@@ -1216,7 +1216,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 * Verifique se a aplicação está funcionando adequadamente:
 
   ```
-  mvn spring:boot run
+  mvn spring-boot:run
 
   -- outra aba do terminal/postman/httpie/curl/etc
   http :8080/api/v1/saldoextrato/mobile
