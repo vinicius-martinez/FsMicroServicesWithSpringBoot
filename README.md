@@ -590,80 +590,43 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
   Project: Maven
   Language: Java
-  Spring Boot: 2.4.2
+  Spring Boot: 3.0.0
   Project Metadata
     Group: br.com.impacta.fullstack
     artifact: saldoextrato
     name: saldoextrato
     Package Name: br.com.impacta.fullstack.saldoextrato
     Packaging: jar
-    Java: 11
+    Java: 17
   Dependencies:
     Spring Web
+    Spring Boot Actuator
+    Gateway
   ```
 
-  ![Criação SaldoExtrato API](images/workshop-criacao-saldoextrato-api/criacao-projeto-saldoextrato.png)
-
-* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
+* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot:run*:
 
   ```
-  ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato(master*) » mvn spring-boot:run
-  [INFO] Scanning for projects...
-  [INFO]
-  [INFO] ---------------< br.com.impacta.fullstack:saldoextrato >----------------
-  [INFO] Building saldoextrato 0.0.1-SNAPSHOT
-  [INFO] --------------------------------[ jar ]---------------------------------
-  [INFO]
-  [INFO] >>> spring-boot-maven-plugin:2.4.2:run (default-cli) > test-compile @ saldoextrato >>>
-  [INFO]
-  [INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ saldoextrato ---
-  [INFO] Using 'UTF-8' encoding to copy filtered resources.
-  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
-  [INFO] Copying 1 resource
-  [INFO] Copying 0 resource
-  [INFO]
-  [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ saldoextrato ---
-  [INFO] Changes detected - recompiling the module!
-  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/target/classes
-  [INFO]
-  [INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ saldoextrato ---
-  [INFO] Using 'UTF-8' encoding to copy filtered resources.
-  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
-  [INFO] skip non existing resourceDirectory /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/src/test/resources
-  [INFO]
-  [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ saldoextrato ---
-  [INFO] Changes detected - recompiling the module!
-  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/target/test-classes
-  [INFO]
-  [INFO] <<< spring-boot-maven-plugin:2.4.2:run (default-cli) < test-compile @ saldoextrato <<<
-  [INFO]
-  [INFO]
-  [INFO] --- spring-boot-maven-plugin:2.4.2:run (default-cli) @ saldoextrato ---
-  [INFO] Attaching agents: []
-  OpenJDK 64-Bit Server VM warning: forcing TieredStopAtLevel to full optimization because JVMCI is enabled
-
     .   ____          _            __ _ _
-   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
   ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-    '  |____| .__|_| |_|_| |_\__, | / / / /
-   =========|_|==============|___/=/_/_/_/
-   :: Spring Boot ::                (v2.4.2)
+  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+  =========|_|==============|___/=/_/_/_/
+  :: Spring Boot ::       (v3.0.0-SNAPSHOT)
 
-  2021-01-19 08:51:55.947  INFO 35084 --- [           main] b.c.i.f.s.SaldoextratoApplication        : Starting SaldoextratoApplication using Java 11.0.7 on marcfleury with PID 35084 (/Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato/target/classes started by vinny in /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/saldoextrato-api-v1/saldoextrato)
-  2021-01-19 08:51:55.948  INFO 35084 --- [           main] b.c.i.f.s.SaldoextratoApplication        : No active profile set, falling back to default profiles: default
-  2021-01-19 08:51:56.753  INFO 35084 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-  2021-01-19 08:51:56.763  INFO 35084 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-  2021-01-19 08:51:56.763  INFO 35084 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-  2021-01-19 08:51:56.819  INFO 35084 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-  2021-01-19 08:51:56.820  INFO 35084 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 831 ms
-  2021-01-19 08:51:56.968  INFO 35084 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-  2021-01-19 08:51:57.141  INFO 35084 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-  2021-01-19 08:51:57.151  INFO 35084 --- [           main] b.c.i.f.s.SaldoextratoApplication        : Started SaldoextratoApplication in 1.673 seconds (JVM running for 2.029)
+  2022-02-13 16:45:07.584  INFO 17277 --- [           main] b.c.i.f.s.SaldoextratoApplication        : Starting SaldoextratoApplication using Java 17.0.1 on marcfleury with PID 17277 (/Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/saldoextrato/target/classes started by vinny in /Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/saldoextrato)
+  2022-02-13 16:45:07.587  INFO 17277 --- [           main] b.c.i.f.s.SaldoextratoApplication        : No active profile set, falling back to default profiles: default
+  2022-02-13 16:45:08.385  INFO 17277 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+  2022-02-13 16:45:08.395  INFO 17277 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+  2022-02-13 16:45:08.395  INFO 17277 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.16]
+  2022-02-13 16:45:08.458  INFO 17277 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+  2022-02-13 16:45:08.460  INFO 17277 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 816 ms
+  2022-02-13 16:45:08.891  INFO 17277 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+  2022-02-13 16:45:08.941  INFO 17277 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+  2022-02-13 16:45:08.955  INFO 17277 --- [           main] b.c.i.f.s.SaldoextratoApplication        : Started SaldoextratoApplication in 1.707 seconds (JVM running for 1.98)
   ```
   * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
-
-  ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-projeto-saldoextrato.png)
 
 * Criar classe **br.com.impacta.fullstack.saldoextrato.Credito**
 
@@ -848,6 +811,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 * Ajustes na configuração de porta no arquivo **src/main/resources/application.properties**:
 
   ```
+  management.endpoints.web.exposure.include=*
+  management.endpoints.jmx.exposure.include=*
   CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
   DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
   ```
@@ -859,9 +824,46 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   -- outra aba do terminal/postman/httpie/curl/etc
   http :8080/api/v1/saldoextrato
-  ```
 
-  ![Execução SaldoExtrato API](images/workshop-criacao-saldoextrato-api/execucao-teste-saldoextrato.png)
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 19:49:33 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "creditoList": [
+          {
+              "credito": 7.2
+          },
+          {
+              "credito": 5.4
+          },
+          {
+              "credito": 8.7
+          },
+          {
+              "credito": 5.2
+          },
+          {
+              "credito": 1.6
+          },
+          {
+              "credito": 3.3
+          },
+          {
+              "credito": 3.3
+          }
+      ],
+      "debitoList": [
+          {
+              "debito": -8.2
+          }
+      ],
+      "saldo": 26.5
+  }
+  ```
 
 ### 3 - Criação SaldoExtrato BFF API <a name="workshop-criacao-saldoextrato-bff-api">
 
@@ -968,9 +970,17 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
   -- outra aba do terminal/postman/httpie/curl/etc
   http :8080/api/v1/saldoextrato/mobile
-  ```
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 20:05:28 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
 
-  ![Execução SaldoExtrato BFF API](images/workshop-criacao-saldoextrato-bff-api/execucao-teste-saldoextratobff.png)
+  {
+      "saldo": 7.6
+  }
+  ```
 
 ### 4 - Criação Config Server <a name="workshop-criacao-config-server">
 
