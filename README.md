@@ -1194,17 +1194,17 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   </project>
   ```
 
-  * Altere o arquivo **application.properties** da aplicação **SaldoExtrato** adicionando o seguinte conteúdo:
+* Altere o arquivo **application.properties** da aplicação **SaldoExtrato** adicionando o seguinte conteúdo:
 
-    ```
-    spring.application.name=saldoextrato
-    management.endpoints.web.exposure.include=*
-    management.endpoints.jmx.exposure.include=*
-    CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
-    DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
-    spring.jackson.default-property-inclusion = non_null
-    spring.config.import=configserver:http://${CONFIG_HOST}:8888
-    ```
+  ```
+  spring.application.name=saldoextrato
+  management.endpoints.web.exposure.include=*
+  management.endpoints.jmx.exposure.include=*
+  CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
+  DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
+  spring.jackson.default-property-inclusion = non_null
+  spring.config.import=configserver:http://${CONFIG_HOST}:8888
+  ```
 
 * Para inicializar a aplicação **SaldoExtrato** corretamente, será necessário incluir duas informações adicionais: *host* do *Config Server* e *profile* da aplicação:
 
@@ -1308,13 +1308,26 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   java.net.UnknownHostException: credito
   ```
 
-* Para desfazer o erro, basta interromper a execução da aplicação **
+* Para desfazer o erro, basta interromper a execução da aplicação **SaldoExtrato**, alterar seu respectivo profile e executar novamente o teste:
 
   ```
   -- este comando precisa ser executado na mesma sessão do terminal onde a aplicação SaldoExtrato esta sendo executada
-  export spring_profiles_active=prod
+  export spring_profiles_active=dev
 
   mvn spring-boot:run
+
+  http :8080/api/v1/saldoextrato/mobile
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 21:31:35 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "saldo": -11.2
+  }
+
   ```
 
 ### 5 - Criação Service Discovery Server <a name="workshop-service-discovery-server">
