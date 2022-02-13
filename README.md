@@ -44,22 +44,30 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     Spring Boot Actuator
   ```
 
-* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot: run*:
+* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot:run*:
 
   ```
-  2022-02-13 15:59:14.541  INFO 15189 --- [           main] b.c.i.f.credito.CreditoApplication       : Starting CreditoApplication using Java 17.0.1 on marcfleury with PID 15189 (/Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/credito/target/classes started by vinny in /Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/credito)
-  2022-02-13 15:59:14.543  INFO 15189 --- [           main] b.c.i.f.credito.CreditoApplication       : No active profile set, falling back to default profiles: default
-  2022-02-13 15:59:15.375  INFO 15189 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-  2022-02-13 15:59:15.385  INFO 15189 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-  2022-02-13 15:59:15.386  INFO 15189 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.16]
-  2022-02-13 15:59:15.446  INFO 15189 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-  2022-02-13 15:59:15.448  INFO 15189 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 857 ms
-  2022-02-13 15:59:15.840  INFO 15189 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-  2022-02-13 15:59:16.124  INFO 15189 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-  2022-02-13 15:59:16.136  INFO 15189 --- [           main] b.c.i.f.credito.CreditoApplication       : Started CreditoApplication in 2.447 seconds (JVM running for 2.762)
-  2022-02-13 15:59:57.496  INFO 15189 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-  2022-02-13 15:59:57.496  INFO 15189 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-  2022-02-13 15:59:57.497  INFO 15189 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+    .   ____          _            __ _ _
+  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+  =========|_|==============|___/=/_/_/_/
+  :: Spring Boot ::       (v3.0.0-SNAPSHOT)
+
+  2022-02-13 16:11:47.280  INFO 15574 --- [           main] b.c.i.f.credito.CreditoApplication       : Starting CreditoApplication using Java 17.0.1 on marcfleury with PID 15574 (/Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/credito/target/classes started by vinny in /Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/credito)
+  2022-02-13 16:11:47.282  INFO 15574 --- [           main] b.c.i.f.credito.CreditoApplication       : No active profile set, falling back to default profiles: default
+  2022-02-13 16:11:48.079  INFO 15574 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+  2022-02-13 16:11:48.087  INFO 15574 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+  2022-02-13 16:11:48.087  INFO 15574 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.16]
+  2022-02-13 16:11:48.149  INFO 15574 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+  2022-02-13 16:11:48.150  INFO 15574 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 828 ms
+  2022-02-13 16:11:48.574  INFO 15574 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoint(s) beneath base path '/actuator'
+  2022-02-13 16:11:48.608  INFO 15574 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+  2022-02-13 16:11:48.617  INFO 15574 --- [           main] b.c.i.f.credito.CreditoApplication       : Started CreditoApplication in 1.631 seconds (JVM running for 1.907)
+  2022-02-13 16:11:56.681  INFO 15574 --- [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+  2022-02-13 16:11:56.681  INFO 15574 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+  2022-02-13 16:11:56.682  INFO 15574 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
   ```
     * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
 
@@ -168,7 +176,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   management.endpoints.jmx.exposure.include=*
   ```
 
-* Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
+* Para testar basta inicializar o serviço e invocar a *API* através do *endpoint /api/v1/credito*:
 
   ```
   mvn spring-boot:run
@@ -206,7 +214,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ]
   ```
 
-* Finalmente para testar o *Actuator* invoque o seguinte *endpoint:*
+* Finalmente para testar o *Actuator* invoque o *endpoint /actuator :*
 
   ```
   http :8081/actuator | jq
@@ -316,180 +324,264 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       Spring Boot Actuator
     ```
 
-    ![Criação Debito API](images/workshop-criacao-debito-api/criacao-projeto-debito.png)
-
-  * Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
+  * Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot:run*:
 
     ```
-    ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/debito-api-v1/debito(master*) » mvn spring-boot:run      vinny@marcfleury
-    [INFO] Scanning for projects...
-    [INFO]
-    [INFO] ------------------< br.com.impacta.fullstack:debito >-------------------
-    [INFO] Building debito 0.0.1-SNAPSHOT
-    [INFO] --------------------------------[ jar ]---------------------------------
-    [INFO]
-    [INFO] >>> spring-boot-maven-plugin:2.4.2:run (default-cli) > test-compile @ debito >>>
-    [INFO]
-    [INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ debito ---
-    [INFO] Using 'UTF-8' encoding to copy filtered resources.
-    [INFO] Using 'UTF-8' encoding to copy filtered properties files.
-    [INFO] Copying 1 resource
-    [INFO] Copying 0 resource
-    [INFO]
-    [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ debito ---
-    [INFO] Changes detected - recompiling the module!
-    [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/debito-api-v1/debito/target/classes
-    [INFO]
-    [INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ debito ---
-    [INFO] Using 'UTF-8' encoding to copy filtered resources.
-    [INFO] Using 'UTF-8' encoding to copy filtered properties files.
-    [INFO] skip non existing resourceDirectory /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/debito-api-v1/debito/src/test/resources
-    [INFO]
-    [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ debito ---
-    [INFO] Changes detected - recompiling the module!
-    [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/debito-api-v1/debito/target/test-classes
-    [INFO]
-    [INFO] <<< spring-boot-maven-plugin:2.4.2:run (default-cli) < test-compile @ debito <<<
-    [INFO]
-    [INFO]
-    [INFO] --- spring-boot-maven-plugin:2.4.2:run (default-cli) @ debito ---
-    [INFO] Attaching agents: []
-    OpenJDK 64-Bit Server VM warning: forcing TieredStopAtLevel to full optimization because JVMCI is enabled
-
-      .   ____          _            __ _ _
-     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+        .   ____          _            __ _ _
+    /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
     ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-      '  |____| .__|_| |_|_| |_\__, | / / / /
-     =========|_|==============|___/=/_/_/_/
-     :: Spring Boot ::                (v2.4.2)
+    \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+    '  |____| .__|_| |_|_| |_\__, | / / / /
+    =========|_|==============|___/=/_/_/_/
+    :: Spring Boot ::       (v3.0.0-SNAPSHOT)
 
-    2021-01-18 16:11:10.623  INFO 28751 --- [           main] b.c.i.f.debito.DebitoApplication         : Starting DebitoApplication using Java 11.0.7 on marcfleury with PID 28751 (/Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/debito-api-v1/debito/target/classes started by vinny in /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/debito-api-v1/debito)
-    2021-01-18 16:11:10.628  INFO 28751 --- [           main] b.c.i.f.debito.DebitoApplication         : No active profile set, falling back to default profiles: default
-    2021-01-18 16:11:11.520  INFO 28751 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-    2021-01-18 16:11:11.534  INFO 28751 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-    2021-01-18 16:11:11.534  INFO 28751 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-    2021-01-18 16:11:11.597  INFO 28751 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-    2021-01-18 16:11:11.597  INFO 28751 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 881 ms
-    2021-01-18 16:11:11.753  INFO 28751 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-    2021-01-18 16:11:11.927  INFO 28751 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-    2021-01-18 16:11:11.938  INFO 28751 --- [           main] b.c.i.f.debito.DebitoApplication         : Started DebitoApplication in 1.805 seconds (JVM running for 2.221)
+    2022-02-13 16:24:18.501  INFO 16316 --- [           main] b.c.i.f.debito.DebitoApplication         : Starting DebitoApplication using Java 17.0.1 on marcfleury with PID 16316 (/Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/debito/target/classes started by vinny in /Users/vinny/Desktop/FullStack/FsMicroServicesWithSpringBoot/source/debito)
+    2022-02-13 16:24:18.503  INFO 16316 --- [           main] b.c.i.f.debito.DebitoApplication         : No active profile set, falling back to default profiles: default
+    2022-02-13 16:24:19.373  INFO 16316 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+    2022-02-13 16:24:19.385  INFO 16316 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+    2022-02-13 16:24:19.386  INFO 16316 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.16]
+    2022-02-13 16:24:19.469  INFO 16316 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+    2022-02-13 16:24:19.472  INFO 16316 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 916 ms
+    2022-02-13 16:24:19.893  INFO 16316 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+    2022-02-13 16:24:19.939  INFO 16316 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+    2022-02-13 16:24:19.951  INFO 16316 --- [           main] b.c.i.f.debito.DebitoApplication         : Started DebitoApplication in 1.822 seconds (JVM running for 2.191)
     ```
       * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
 
-    ![Execução Debito API](images/workshop-criacao-debito-api/execucao-projeto-debito.png)
+* Criar classe **br.com.impacta.fullstack.debito.Debito**
 
-  * Criar classe **br.com.impacta.fullstack.debito.Debito**
+  ```
+  package br.com.impacta.fullstack.debito;
 
-    ```
-    package br.com.impacta.fullstack.debito;
+  import java.io.Serializable;
+  import java.math.BigDecimal;
 
-    import java.io.Serializable;
-    import java.math.BigDecimal;
+  public class Debito implements Serializable {
 
-    public class Debito implements Serializable {
+      private BigDecimal debito;
 
-        private BigDecimal debito;
+      public Debito() {
+          super();
+      }
 
-        public Debito() {
-            super();
-        }
+      public Debito(BigDecimal debito) {
+          this.debito = debito;
+      }
 
-        public Debito(BigDecimal debito) {
-            this.debito = debito;
-        }
+      public BigDecimal getDebito() {
+          return debito;
+      }
 
-        public BigDecimal getDebito() {
-            return debito;
-        }
+      public void setDebito(BigDecimal debito) {
+          this.debito = debito;
+      }
+  }
+  ```
 
-        public void setDebito(BigDecimal debito) {
-            this.debito = debito;
-        }
-    }
-    ```
+* Criar classe **br.com.impacta.fullstack.debito.DebitoService**
 
-  * Criar classe **br.com.impacta.fullstack.debito.DebitoService**
+  ```
+  package br.com.impacta.fullstack.debito;
 
-    ```
-    package br.com.impacta.fullstack.debito;
+  import org.springframework.stereotype.Component;
 
-    import org.springframework.stereotype.Component;
+  import java.math.BigDecimal;
+  import java.math.BigInteger;
+  import java.util.ArrayList;
+  import java.util.List;
+  import java.util.Random;
 
-    import java.math.BigDecimal;
-    import java.math.BigInteger;
-    import java.util.ArrayList;
-    import java.util.List;
-    import java.util.Random;
+  @Component
+  public class DebitoService {
 
-    @Component
-    public class DebitoService {
+      private static final BigDecimal minValue = new BigDecimal(BigInteger.ONE);
+      private static final BigDecimal maxValue = new BigDecimal(BigInteger.TEN);
 
-        private static final BigDecimal minValue = new BigDecimal(BigInteger.ONE);
-        private static final BigDecimal maxValue = new BigDecimal(BigInteger.TEN);
+      public List<Debito> list(){
+          int numberOfDebit = new Random().nextInt(10) + 1;
+          List<Debito> debitoList = new ArrayList<Debito>(10);
+          for (int i = 0; i < numberOfDebit; i++) {
+              BigDecimal randomValue = minValue.add(new BigDecimal(Math.random()).multiply(maxValue.subtract(minValue))).setScale(1, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal("-1"));
+              Debito debito = new Debito(randomValue);
+              debitoList.add(debito);
+          }
+          System.out.println("debitoList: " + debitoList);
+          return debitoList;
+      }
+  }
+  ```
 
-        public List<Debito> list(){
-            int numberOfDebit = new Random().nextInt(10) + 1;
-            List<Debito> debitoList = new ArrayList<Debito>(10);
-            for (int i = 0; i < numberOfDebit; i++) {
-                BigDecimal randomValue = minValue.add(new BigDecimal(Math.random()).multiply(maxValue.subtract(minValue))).setScale(1, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal("-1"));
-                Debito debito = new Debito(randomValue);
-                debitoList.add(debito);
-            }
-            System.out.println("debitoList: " + debitoList);
-            return debitoList;
-        }
-    }
-    ```
+* Criar classe **br.com.impacta.fullstack.debito.DebitoController**
 
-  * Criar classe **br.com.impacta.fullstack.debito.DebitoController**
+  ```
+  package br.com.impacta.fullstack.debito;
 
-    ```
-    package br.com.impacta.fullstack.debito;
+  import org.springframework.web.bind.annotation.GetMapping;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  import org.springframework.web.bind.annotation.RestController;
 
-    import org.springframework.web.bind.annotation.GetMapping;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RestController;
+  import java.net.InetAddress;
+  import java.net.UnknownHostException;
+  import java.util.List;
 
-    import java.net.InetAddress;
-    import java.net.UnknownHostException;
-    import java.util.List;
+  @RestController
+  @RequestMapping("/api/v1/debito")
+  public class DebitoController {
 
-    @RestController
-    @RequestMapping("/api/v1/debito")
-    public class DebitoController {
+      private final DebitoService debitoService;
 
-        private final DebitoService debitoService;
+      public DebitoController(DebitoService debitoService) {
+          this.debitoService = debitoService;
+      }
 
-        public DebitoController(DebitoService debitoService) {
-            this.debitoService = debitoService;
-        }
+      @GetMapping
+      public List<Debito> list() throws UnknownHostException {
+          System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
+          List<Debito> debitoList = debitoService.list();
+          return debitoList;
+      }
+  }
+  ```
 
-        @GetMapping
-        public List<Debito> list() throws UnknownHostException {
-            System.out.println("Hostname: " + InetAddress.getLocalHost().getHostName());
-            List<Debito> debitoList = debitoService.list();
-            return debitoList;
-        }
-    }
-    ```
+* Ajustes na configuração de porta para evitar conflitos no arquivo **src/main/resources/application.properties**:
 
-  * Ajustes na configuração de porta para evitar conflitos no arquivo **src/main/resources/application.properties**:
+  ```
+  server.port = 8082
+  management.endpoints.web.exposure.include=*
+  management.endpoints.jmx.exposure.include=*
+  ```
 
-    ```
-    server.port = 8082
-    ```
+* Para testar basta inicializar o serviço e invocar a *API* através de seu *endpoint /api/v1/debito*
 
-  * Para testar basta inicializar o serviço e invocar a *API* através de seu endpoint:
+  ```
+  mvn spring:boot run
 
-    ```
-    mvn spring:boot run
+  -- outra aba do terminal/postman/httpie/curl/etc
+  http :8082/api/v1/debito
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 19:30:01 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
 
-    -- outra aba do terminal/postman/httpie/curl/etc
-    http :8082/api/v1/debito
-    ```
+  [
+      {
+          "debito": -5.4
+      },
+      {
+          "debito": -3.2
+      },
+      {
+          "debito": -5.3
+      },
+      {
+          "debito": -6.6
+      },
+      {
+          "debito": -3.2
+      },
+      {
+          "debito": -8.9
+      },
+      {
+          "debito": -1.3
+      },
+      {
+          "debito": -8.8
+      }
+  ]
+  ```
 
-    ![Execução Debito API](images/workshop-criacao-debito-api/execucao-teste-debito.png)
+* Finalmente para testar o *Actuator* invoque o *endpoint /actuator :*
+
+  ```
+  http :8082/actuator | jq
+  {
+   "_links": {
+     "self": {
+       "href": "http://localhost:8082/actuator",
+       "templated": false
+     },
+     "beans": {
+       "href": "http://localhost:8082/actuator/beans",
+       "templated": false
+     },
+     "caches-cache": {
+       "href": "http://localhost:8082/actuator/caches/{cache}",
+       "templated": true
+     },
+     "caches": {
+       "href": "http://localhost:8082/actuator/caches",
+       "templated": false
+     },
+     "health-path": {
+       "href": "http://localhost:8082/actuator/health/{*path}",
+       "templated": true
+     },
+     "health": {
+       "href": "http://localhost:8082/actuator/health",
+       "templated": false
+     },
+     "info": {
+       "href": "http://localhost:8082/actuator/info",
+       "templated": false
+     },
+     "conditions": {
+       "href": "http://localhost:8082/actuator/conditions",
+       "templated": false
+     },
+     "configprops": {
+       "href": "http://localhost:8082/actuator/configprops",
+       "templated": false
+     },
+     "configprops-prefix": {
+       "href": "http://localhost:8082/actuator/configprops/{prefix}",
+       "templated": true
+     },
+     "env": {
+       "href": "http://localhost:8082/actuator/env",
+       "templated": false
+     },
+     "env-toMatch": {
+       "href": "http://localhost:8082/actuator/env/{toMatch}",
+       "templated": true
+     },
+     "loggers": {
+       "href": "http://localhost:8082/actuator/loggers",
+       "templated": false
+     },
+     "loggers-name": {
+       "href": "http://localhost:8082/actuator/loggers/{name}",
+       "templated": true
+     },
+     "heapdump": {
+       "href": "http://localhost:8082/actuator/heapdump",
+       "templated": false
+     },
+     "threaddump": {
+       "href": "http://localhost:8082/actuator/threaddump",
+       "templated": false
+     },
+     "metrics-requiredMetricName": {
+       "href": "http://localhost:8082/actuator/metrics/{requiredMetricName}",
+       "templated": true
+     },
+     "metrics": {
+       "href": "http://localhost:8082/actuator/metrics",
+       "templated": false
+     },
+     "scheduledtasks": {
+       "href": "http://localhost:8082/actuator/scheduledtasks",
+       "templated": false
+     },
+     "mappings": {
+       "href": "http://localhost:8082/actuator/mappings",
+       "templated": false
+     }
+   }
+  }
+  ```
 
 ### 2 - Criação SaldoExtrato API <a name="workshop-criacao-saldoextrato-api">
 
