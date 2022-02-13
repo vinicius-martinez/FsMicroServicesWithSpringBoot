@@ -30,7 +30,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ```
   Project: Maven
   Language: Java
-  Spring Boot: 2.4.2
+  Spring Boot: 3.0.0
   Project Metadata
     Group: br.com.impacta.fullstack
     artifact: credito
@@ -40,9 +40,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     Java: 11
   Dependencies:
     Spring Web
+    Spring Boot Actuator
   ```
-
-  ![Criação Credito API](images/workshop-criacao-credito-api/criacao-projeto-credito.png)
 
 * Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot: run*:
 
