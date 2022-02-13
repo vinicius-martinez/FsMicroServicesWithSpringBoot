@@ -996,76 +996,10 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     name: configserver
     Package Name: br.com.impacta.fullstack.configserver
     Packaging: jar
-    Java: 11
+    Java: 17
   Dependencies:
     Config Server
   ```
-
-  ![Criação Config Server](images/workshop-criacao-config-server/criacao-projeto-configserver.png)
-
-* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring:boot run*:
-
-  ```
-  ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver(master*) » mvn spring-boot:run
-  [INFO] Scanning for projects...
-  [INFO]
-  [INFO] ---------------< br.com.impacta.fullstack:configserver >----------------
-  [INFO] Building configserver 0.0.1-SNAPSHOT
-  [INFO] --------------------------------[ jar ]---------------------------------
-  [INFO]
-  [INFO] >>> spring-boot-maven-plugin:2.4.2:run (default-cli) > test-compile @ configserver >>>
-  [INFO]
-  [INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ configserver ---
-  [INFO] Using 'UTF-8' encoding to copy filtered resources.
-  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
-  [INFO] Copying 1 resource
-  [INFO] Copying 0 resource
-  [INFO]
-  [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ configserver ---
-  [INFO] Changes detected - recompiling the module!
-  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/target/classes
-  [INFO]
-  [INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ configserver ---
-  [INFO] Using 'UTF-8' encoding to copy filtered resources.
-  [INFO] Using 'UTF-8' encoding to copy filtered properties files.
-  [INFO] skip non existing resourceDirectory /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/src/test/resources
-  [INFO]
-  [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ configserver ---
-  [INFO] Changes detected - recompiling the module!
-  [INFO] Compiling 1 source file to /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/target/test-classes
-  [INFO]
-  [INFO] <<< spring-boot-maven-plugin:2.4.2:run (default-cli) < test-compile @ configserver <<<
-  [INFO]
-  [INFO]
-  [INFO] --- spring-boot-maven-plugin:2.4.2:run (default-cli) @ configserver ---
-  [INFO] Attaching agents: []
-  OpenJDK 64-Bit Server VM warning: forcing TieredStopAtLevel to full optimization because JVMCI is enabled
-
-    .   ____          _            __ _ _
-   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-    '  |____| .__|_| |_|_| |_\__, | / / / /
-   =========|_|==============|___/=/_/_/_/
-   :: Spring Boot ::                (v2.4.2)
-
-  2021-01-20 09:52:41.732  INFO 2673 --- [           main] b.c.i.f.c.ConfigserverApplication        : Starting ConfigserverApplication using Java 11.0.7 on marcfleury with PID 2673 (/Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver/target/classes started by vinny in /Users/vinny/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/MicroServicesWithSpringBoot/source/config-server-v1/configserver)
-  2021-01-20 09:52:41.734  INFO 2673 --- [           main] b.c.i.f.c.ConfigserverApplication        : No active profile set, falling back to default profiles: default
-  2021-01-20 09:52:42.930  INFO 2673 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=5d126ee3-1e57-37c9-ba7b-c3609c50757a
-  2021-01-20 09:52:43.420  INFO 2673 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-  2021-01-20 09:52:43.430  INFO 2673 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-  2021-01-20 09:52:43.430  INFO 2673 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-  2021-01-20 09:52:43.561  INFO 2673 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-  2021-01-20 09:52:43.561  INFO 2673 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1768 ms
-  2021-01-20 09:52:43.894  INFO 2673 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-  2021-01-20 09:52:44.190  INFO 2673 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-  2021-01-20 09:52:44.269  INFO 2673 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-  2021-01-20 09:52:44.298  INFO 2673 --- [           main] b.c.i.f.c.ConfigserverApplication        : Started ConfigserverApplication in 3.045 seconds (JVM running for 3.429)
-  ```
-
-    * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
-
-  ![Execução Config Server](images/workshop-criacao-config-server/execucao-projeto-configserver.png)
 
 * Inclua a *Annotation @EnableConfigServer* na classe **br.com.impacta.fullstack.configserver.ConfigServerApplication**
 
@@ -1087,7 +1021,78 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   }
   ```
 
-* Altere o arquivo **pom.xml** incluindo as dependências necessárias:
+* Altere o arquivo **application.properties** adicionando o seguinte conteúdo:
+
+  ```
+  server.port = 8888
+  spring.application.name=configserver
+  spring.cloud.config.server.git.uri=https://github.com/vinicius-martinez/FsConfigServer
+  spring.cloud.config.server.git.default-label=master
+  ```
+
+* Inicie o servico do *configserver* executando *mvn spring-boot:run*
+
+* Verifique se as *properties* estão sendo retornadas com sucesso:
+
+  ```
+  -- outra aba do terminal/postman/httpie/curl/etc
+  http :8888/saldoextrato/prod
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 20:48:48 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "label": null,
+      "name": "saldoextrato",
+      "profiles": [
+          "prod"
+      ],
+      "propertySources": [
+          {
+              "name": "https://github.com/vinicius-martinez/FsConfigServer/saldoextrato-prod.properties",
+              "source": {
+                  "CREDITO_API_URL": "http://credito:8081/api/v1/credito",
+                  "DEBITO_API_URL": "http://debito:8082/api/v1/debito"
+              }
+          }
+      ],
+      "state": null,
+      "version": "a7ee9ee2b497fb5a71a74d6a68218f2b8fa1683f"
+  }
+
+  -- outra aba do terminal/postman/httpie/curl/etc
+  http :8888/saldoextrato/dev
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 20:48:56 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "label": null,
+      "name": "saldoextrato",
+      "profiles": [
+          "dev"
+      ],
+      "propertySources": [
+          {
+              "name": "https://github.com/vinicius-martinez/FsConfigServer/saldoextrato-dev.properties",
+              "source": {
+                  "CREDITO_API_URL": "http://localhost:8081/api/v1/credito",
+                  "DEBITO_API_URL": "http://localhost:8082/api/v1/debito"
+              }
+          }
+      ],
+      "state": null,
+      "version": "a7ee9ee2b497fb5a71a74d6a68218f2b8fa1683f"
+  }
+  ```
+
+* No projeto **SaldoExtrato** modique o arquivo **pom.xml** adicionando as dependências para utilização do *Config Server*:
 
   ```
   <?xml version="1.0" encoding="UTF-8"?>
@@ -1097,31 +1102,38 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   	<parent>
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-starter-parent</artifactId>
-  		<version>2.4.2</version>
+  		<version>3.0.0-SNAPSHOT</version>
   		<relativePath/> <!-- lookup parent from repository -->
   	</parent>
   	<groupId>br.com.impacta.fullstack</groupId>
-  	<artifactId>configserver</artifactId>
+  	<artifactId>saldoextrato</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
-  	<name>configserver</name>
+  	<name>saldoextrato</name>
   	<description>Demo project for Spring Boot</description>
   	<properties>
-  		<java.version>11</java.version>
-  		<spring-cloud.version>2020.0.0</spring-cloud.version>
+  		<java.version>17</java.version>
+  		<spring-cloud.version>2022.0.0-M1</spring-cloud.version>
   	</properties>
-
   	<dependencies>
   		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-config-server</artifactId>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-actuator</artifactId>
   		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-starter-config</artifactId>
+  		</dependency>
+
   		<dependency>
   			<groupId>org.springframework.boot</groupId>
   			<artifactId>spring-boot-starter-test</artifactId>
   			<scope>test</scope>
   		</dependency>
   	</dependencies>
-
   	<dependencyManagement>
   		<dependencies>
   			<dependency>
@@ -1147,108 +1159,162 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   			<id>spring-milestones</id>
   			<name>Spring Milestones</name>
   			<url>https://repo.spring.io/milestone</url>
+  			<snapshots>
+  				<enabled>false</enabled>
+  			</snapshots>
+  		</repository>
+  		<repository>
+  			<id>spring-snapshots</id>
+  			<name>Spring Snapshots</name>
+  			<url>https://repo.spring.io/snapshot</url>
+  			<releases>
+  				<enabled>false</enabled>
+  			</releases>
   		</repository>
   	</repositories>
+  	<pluginRepositories>
+  		<pluginRepository>
+  			<id>spring-milestones</id>
+  			<name>Spring Milestones</name>
+  			<url>https://repo.spring.io/milestone</url>
+  			<snapshots>
+  				<enabled>false</enabled>
+  			</snapshots>
+  		</pluginRepository>
+  		<pluginRepository>
+  			<id>spring-snapshots</id>
+  			<name>Spring Snapshots</name>
+  			<url>https://repo.spring.io/snapshot</url>
+  			<releases>
+  				<enabled>false</enabled>
+  			</releases>
+  		</pluginRepository>
+  	</pluginRepositories>
 
   </project>
   ```
 
-* Por fim altere o arquivo **application.properties** adicionando o seguinte conteúdo:
+  * Altere o arquivo **application.properties** da aplicação **SaldoExtrato** adicionando o seguinte conteúdo:
 
-  ```
-  server.port=8888
-  spring.application.name=configserver
-  spring.cloud.config.server.git.uri=https://github.com/vinicius-martinez/FsConfigServer
-  ```
-
-* No projeto **SaldoExtrato** modique o arquivo **pom.xml** adicionando as dependências para utilização do *Config Server*:
-
-  ```
-  <?xml version="1.0" encoding="UTF-8"?>
-  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  	<modelVersion>4.0.0</modelVersion>
-  	<parent>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-parent</artifactId>
-  		<version>2.4.2</version>
-  		<relativePath/>
-  	</parent>
-  	<groupId>br.com.impacta.fullstack</groupId>
-  	<artifactId>saldoextrato</artifactId>
-  	<version>0.0.3-SNAPSHOT</version>
-  	<name>saldoextrato</name>
-  	<description>Demo project for Spring Boot</description>
-
-  	<properties>
-  		<java.version>11</java.version>
-  		<spring.cloud-version>2020.0.0</spring.cloud-version>
-  	</properties>
-
-  	<dependencies>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-web</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-config</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-bootstrap</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-test</artifactId>
-  			<scope>test</scope>
-  		</dependency>
-  	</dependencies>
-
-  	<dependencyManagement>
-  		<dependencies>
-  			<dependency>
-  				<groupId>org.springframework.cloud</groupId>
-  				<artifactId>spring-cloud-dependencies</artifactId>
-  				<version>${spring.cloud-version}</version>
-  				<type>pom</type>
-  				<scope>import</scope>
-  			</dependency>
-  		</dependencies>
-  	</dependencyManagement>
-
-  	<build>
-  		<plugins>
-  			<plugin>
-  				<groupId>org.springframework.boot</groupId>
-  				<artifactId>spring-boot-maven-plugin</artifactId>
-  			</plugin>
-  		</plugins>
-  	</build>
-
-  </project>
-  ```
-
-* Ainda no projeto *SaldoExtrato* crie um arquivo chamado **bootstrap.properties** com o seguinte conteúdo:
-
-  ```
-  spring.application.name=saldoextrato
-  spring.cloud.config.uri=http://${CONFIG_HOST}:8888
-  management.endpoints.web.exposure.include=refresh
-  ```
-
+    ```
+    spring.application.name=saldoextrato
+    management.endpoints.web.exposure.include=*
+    management.endpoints.jmx.exposure.include=*
+    CREDITO_API_URL = ${CREDITO_URL:http://localhost:8081/api/v1/credito}
+    DEBITO_API_URL = ${DEBITO_URL:http://localhost:8082/api/v1/debito}
+    spring.jackson.default-property-inclusion = non_null
+    spring.config.import=configserver:http://${CONFIG_HOST}:8888
+    ```
 
 * Para inicializar a aplicação **SaldoExtrato** corretamente, será necessário incluir duas informações adicionais: *host* do *Config Server* e *profile* da aplicação:
 
   ```
-  export spring_profiles_active=dev
-  export CONFIG_HOST=localhost
+  export spring_profiles_active=dev;export CONFIG_HOST=localhost
+  echo $spring_profiles_active;echo $CONFIG_HOST
+  ```
 
+* Verifique se a aplicação está funcionando adequadamente:
+
+  ```
   mvn spring:boot run
 
   -- outra aba do terminal/postman/httpie/curl/etc
   http :8080/api/v1/saldoextrato/mobile
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 21:06:18 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "saldo": 2.2
+  }
+
+
   http :8080/api/v1/saldoextrato
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 21:06:22 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "creditoList": [
+          {
+              "credito": 2.0
+          },
+          {
+              "credito": 3.2
+          },
+          {
+              "credito": 1.4
+          },
+          {
+              "credito": 4.8
+          },
+          {
+              "credito": 2.0
+          },
+          {
+              "credito": 3.4
+          },
+          {
+              "credito": 1.2
+          }
+      ],
+      "debitoList": [
+          {
+              "debito": -7.9
+          },
+          {
+              "debito": -2.0
+          }
+      ],
+      "saldo": 8.1
+  }
+  ```
+
+* Vamos inserir um erro na aplicação **SaldoExtrato**, modificando seu respectivo *profile* da aplicação:
+
+  ```
+  -- este comando precisa ser executado na mesma sessão do terminal onde a aplicação SaldoExtrato esta sendo executada
+  export spring_profiles_active=prod
+
+  mvn spring-boot:run
+  ```
+
+* Ao executar a chamada na aplicação **SaldoExtrato**, verificamos que um erro é retornado, e indo no terminal da aplicação, observa-se a referência ao *endpoint credito* alterado:
+
+  ```
+  http :8080/api/v1/saldoextrato/mobile
+  HTTP/1.1 500
+  Connection: close
+  Content-Type: application/json
+  Date: Sun, 13 Feb 2022 21:26:50 GMT
+  Transfer-Encoding: chunked
+
+  {
+      "error": "Internal Server Error",
+      "path": "/api/v1/saldoextrato/mobile",
+      "status": 500,
+      "timestamp": "2022-02-13T21:26:50.127+00:00"
+  }
+
+  -- na sessão do terminal da aplicação SaldoExtrato:
+  2022-02-13 18:26:50.120 ERROR 21592 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://credito:8081/api/v1/credito": credito; nested exception is java.net.UnknownHostException: credito] with root cause
+
+  java.net.UnknownHostException: credito
+  ```
+
+* Para desfazer o erro, basta interromper a execução da aplicação **
+
+  ```
+  -- este comando precisa ser executado na mesma sessão do terminal onde a aplicação SaldoExtrato esta sendo executada
+  export spring_profiles_active=prod
+
+  mvn spring-boot:run
   ```
 
 ### 5 - Criação Service Discovery Server <a name="workshop-service-discovery-server">
