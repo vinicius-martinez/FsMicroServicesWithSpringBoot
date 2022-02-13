@@ -38,7 +38,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     name: credito
     Package Name: br.com.impacta.fullstack.credito
     Packaging: jar
-    Java: 11
+    Java: 17
   Dependencies:
     Spring Web
     Spring Boot Actuator
@@ -206,7 +206,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   ]
   ```
 
-  * Finalmente para testar o *Actuator* invoque o seguinte *endpoint:*
+* Finalmente para testar o *Actuator* invoque o seguinte *endpoint:*
 
   ```
   http :8081/actuator | jq
@@ -303,16 +303,17 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     ```
     Project: Maven
     Language: Java
-    Spring Boot: 2.4.2
+    Spring Boot: 3.0.0
     Project Metadata
       Group: br.com.impacta.fullstack
       artifact: debito
       name: debito
       Package Name: br.com.impacta.fullstack.debito
       Packaging: jar
-      Java: 11
+      Java: 17
     Dependencies:
       Spring Web
+      Spring Boot Actuator
     ```
 
     ![Criação Debito API](images/workshop-criacao-debito-api/criacao-projeto-debito.png)
