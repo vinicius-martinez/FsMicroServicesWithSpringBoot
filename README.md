@@ -1374,269 +1374,44 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   @EnableAutoConfiguration
   @EnableDiscoveryClient
   ```
-  
-* Altere a classe **ServiceDiscoveryApplication** adicionando a *EnableEurekaServer:
+
+* Modifique os arquivos **application.properties** de todas as aplicações adicionando as seguintes propriedades:
 
   ```
-  package br.com.impacta.fullstack.servicediscovery;
+  -- aplicacao debito
+  spring.application.name=debito
+  spring.cloud.consul.discovery.instanceId=${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}
 
-  import org.springframework.boot.SpringApplication;
-  import org.springframework.boot.autoconfigure.SpringBootApplication;
-  import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+  -- aplicacao credito
+  spring.application.name=credito
+  spring.cloud.consul.discovery.instanceId=${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}
 
-  @SpringBootApplication
-  @EnableEurekaServer
-  public class ServiceDiscoveryApplication {
+  -- aplicacao saldoextrato
+  spring.application.name=saldoextrato
+  spring.cloud.consul.discovery.instanceId=${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}
+  ```
 
-  	public static void main(String[] args) {
-  		SpringApplication.run(ServiceDiscoveryApplication.class, args);
-  	}
+* Inicie todos os serviços verifique na própria interface do *Consul (http://localhost:8500/ui/dc1/services)* que os serviços foram publicados
 
+  ```
+  curl localhost:8500/v1/catalog/services
+  {
+      "consul": [],
+      "credito": [],
+      "debito": [],
+      "saldoextrato": []
   }
   ```
 
-* Altere o arquivo **application.properties** com o seguinte conteúdo:
+* Atualize o conteúdo do arquivo **application.properties** no projeto **SaldoExtrato** com o seguinte conteúdo:
 
   ```
-  server.port=8761
-
-  eureka.client.register-with-eureka=false
-  eureka.client.fetch-registry=false
-
-  logging.level.com.netflix.eureka=OFF
-  logging.level.com.netflix.discovery=OFF
-  ```
-
-* Modifique o arquivo **pom.xml** projeto **Credito** adicionando o seguinte conteúdo:
-
-  ```
-  <?xml version="1.0" encoding="UTF-8"?>
-  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  	<modelVersion>4.0.0</modelVersion>
-  	<parent>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-parent</artifactId>
-  		<version>2.4.2</version>
-  		<relativePath/> <!-- lookup parent from repository -->
-  	</parent>
-  	<groupId>br.com.impacta.fullstack</groupId>
-  	<artifactId>credito</artifactId>
-  	<version>0.0.2-SNAPSHOT</version>
-  	<name>credito</name>
-  	<description>Demo project for Spring Boot</description>
-
-  	<properties>
-  		<java.version>11</java.version>
-  		<spring-cloud.version>2020.0.0</spring-cloud.version>
-  	</properties>
-
-  	<dependencies>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-web</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-test</artifactId>
-  			<scope>test</scope>
-  		</dependency>
-  	</dependencies>
-
-  	<dependencyManagement>
-  		<dependencies>
-  			<dependency>
-  				<groupId>org.springframework.cloud</groupId>
-  				<artifactId>spring-cloud-dependencies</artifactId>
-  				<version>${spring-cloud.version}</version>
-  				<type>pom</type>
-  				<scope>import</scope>
-  			</dependency>
-  		</dependencies>
-  	</dependencyManagement>
-
-  	<build>
-  		<plugins>
-  			<plugin>
-  				<groupId>org.springframework.boot</groupId>
-  				<artifactId>spring-boot-maven-plugin</artifactId>
-  			</plugin>
-  		</plugins>
-  	</build>
-
-  </project>
-  ```
-
-* Modifique o arquivo **application.properties** projeto **Credito** adicionando o seguinte conteúdo:
-
-  ```
-  server.port = 8081
-  spring.application.name=credito-v2
-  eureka.client.serviceUrl.defaultZone = http://localhost:8761/eureka/
-  ```
-
-* Modifique o arquivo **pom.xml** projeto **Debito** adicionando o seguinte conteúdo:
-
-  ```
-  <?xml version="1.0" encoding="UTF-8"?>
-  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  	<modelVersion>4.0.0</modelVersion>
-  	<parent>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-parent</artifactId>
-  		<version>2.4.2</version>
-  		<relativePath/> <!-- lookup parent from repository -->
-  	</parent>
-  	<groupId>br.com.impacta.fullstack</groupId>
-  	<artifactId>debito</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  	<name>debito</name>
-  	<description>Demo project for Spring Boot</description>
-
-  	<properties>
-  		<java.version>11</java.version>
-  		<spring-cloud.version>2020.0.0</spring-cloud.version>
-  	</properties>
-
-  	<dependencies>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-web</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-test</artifactId>
-  			<scope>test</scope>
-  		</dependency>
-  	</dependencies>
-
-  	<dependencyManagement>
-  		<dependencies>
-  			<dependency>
-  				<groupId>org.springframework.cloud</groupId>
-  				<artifactId>spring-cloud-dependencies</artifactId>
-  				<version>${spring-cloud.version}</version>
-  				<type>pom</type>
-  				<scope>import</scope>
-  			</dependency>
-  		</dependencies>
-  	</dependencyManagement>
-
-  	<build>
-  		<plugins>
-  			<plugin>
-  				<groupId>org.springframework.boot</groupId>
-  				<artifactId>spring-boot-maven-plugin</artifactId>
-  			</plugin>
-  		</plugins>
-  	</build>
-
-  </project>
-  ```
-
-* Modifique o arquivo **application.properties** projeto **Credito** adicionando o seguinte conteúdo:
-
-  ```
-  server.port = 8082
-  spring.application.name=debito-v2
-  eureka.client.serviceUrl.defaultZone = http://localhost:8761/eureka/
-  ```
-
-* Modifique o arquivo **pom.xml** projeto **SaldoExtrato** adicionando o seguinte conteúdo:
-
-  ```
-  <?xml version="1.0" encoding="UTF-8"?>
-  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  	<modelVersion>4.0.0</modelVersion>
-  	<parent>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-parent</artifactId>
-  		<version>2.4.2</version>
-  		<relativePath/>
-  	</parent>
-  	<groupId>br.com.impacta.fullstack</groupId>
-  	<artifactId>saldoextrato</artifactId>
-  	<version>0.0.4-SNAPSHOT</version>
-  	<name>saldoextrato</name>
-  	<description>Demo project for Spring Boot</description>
-
-  	<properties>
-  		<java.version>11</java.version>
-  		<spring.cloud-version>2020.0.0</spring.cloud-version>
-  	</properties>
-
-  	<dependencies>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-web</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-  		</dependency>
-  		<!--
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-config</artifactId>
-  		</dependency>-->
-  		<dependency>
-  			<groupId>org.springframework.cloud</groupId>
-  			<artifactId>spring-cloud-starter-bootstrap</artifactId>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-test</artifactId>
-  			<scope>test</scope>
-  		</dependency>
-  	</dependencies>
-
-  	<dependencyManagement>
-  		<dependencies>
-  			<dependency>
-  				<groupId>org.springframework.cloud</groupId>
-  				<artifactId>spring-cloud-dependencies</artifactId>
-  				<version>${spring.cloud-version}</version>
-  				<type>pom</type>
-  				<scope>import</scope>
-  			</dependency>
-  		</dependencies>
-  	</dependencyManagement>
-
-  	<build>
-  		<plugins>
-  			<plugin>
-  				<groupId>org.springframework.boot</groupId>
-  				<artifactId>spring-boot-maven-plugin</artifactId>
-  			</plugin>
-  		</plugins>
-  	</build>
-
-  </project>
-  ```
-
-* Modifique o arquivo **application.properties** projeto **SaldoExtrato** adicionando o seguinte conteúdo:
-
-  ```
-  spring.jackson.default-property-inclusion = non_null
-  eureka.client.serviceUrl.defaultZone = http://localhost:8761/eureka/
   spring.application.name=saldoextrato
-  ```
-
-* Remova/comente o conteúdo do arquivo **bootstrap.properties** no projeto **SaldoExtrato**:
-
-  ```
-  #spring.cloud.config.uri=http://${CONFIG_HOST}:8888
-  #management.endpoints.web.exposure.include=refresh
+  management.endpoints.web.exposure.include=*
+  management.endpoints.jmx.exposure.include=*
+  spring.jackson.default-property-inclusion = non_null
+  spring.config.import=configserver:http://${CONFIG_HOST}:8888
+  spring.cloud.consul.discovery.instanceId=${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}
   ```
 
 * Altere o conteúdo da classe **br.com.impacta.fullstack.saldoextrato.SaldoExtratoService*** no projeto **SaldoExtrato**:
@@ -1658,19 +1433,13 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
   @Component
   public class SaldoExtratoService {
 
-      //@Value("${CREDITO_API_URL}")
-      //private String CREDITO_API_URL;
-
-      //@Value("${DEBITO_API_URL}")
-      //private String DEBITO_API_URL;
-
       @Autowired
       private DiscoveryClient discoveryClient;
 
       public SaldoExtrato get(){
           RestTemplate restTemplate = new RestTemplate();
           //Get Credito
-          ServiceInstance serviceInstance = discoveryClient.getInstances("credito-v2").get(0);
+          ServiceInstance serviceInstance = discoveryClient.getInstances("credito").get(0);
           String creditoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/credito";
           ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(creditoUrl, Credito[].class);
           System.out.println("CREDITO_API_URL: " + creditoUrl);
@@ -1679,7 +1448,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
           SaldoExtrato saldoExtrato = new SaldoExtrato();
           saldoExtrato.setCreditoList(creditoList);
           //Get Debito
-          serviceInstance = discoveryClient.getInstances("debito-v2").get(0);
+          serviceInstance = discoveryClient.getInstances("debito").get(0);
           String debitoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/debito";
           ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(debitoUrl, Debito[].class);
           System.out.println("DEBITO_API_URL: " + debitoUrl);
@@ -1696,14 +1465,14 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
       public SaldoExtrato getBff(){
           RestTemplate restTemplate = new RestTemplate();
           //Get Credito
-          ServiceInstance serviceInstance = discoveryClient.getInstances("credito-v2").get(0);
+          ServiceInstance serviceInstance = discoveryClient.getInstances("credito").get(0);
           String creditoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/credito";
           ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(creditoUrl, Credito[].class);
           System.out.println("CREDITO_API_URL: " + creditoUrl);
           List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
           System.out.println("Creditos: " + creditoList);
           //Get Debito
-          serviceInstance = discoveryClient.getInstances("debito-v2").get(0);
+          serviceInstance = discoveryClient.getInstances("debito").get(0);
           String debitoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/debito";
           ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(debitoUrl, Debito[].class);
           System.out.println("DEBITO_API_URL: " + debitoUrl);

@@ -1,6 +1,8 @@
 package br.com.impacta.fullstack.saldoextrato;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,24 +14,25 @@ import java.util.List;
 @Component
 public class SaldoExtratoService {
 
-    @Value(value = "${CREDITO_API_URL}")
-    private String CREDITO_API_URL;
-
-    @Value(value = "${DEBITO_API_URL}")
-    private String DEBITO_API_URL;
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     public SaldoExtrato get(){
         RestTemplate restTemplate = new RestTemplate();
         //Get Credito
-        ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(CREDITO_API_URL, Credito[].class);
-        System.out.println("CREDITO_API_URL: " + CREDITO_API_URL);
+        ServiceInstance serviceInstance = discoveryClient.getInstances("credito").get(0);
+        String creditoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/credito";
+        ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(creditoUrl, Credito[].class);
+        System.out.println("CREDITO_API_URL: " + creditoUrl);
         List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
         System.out.println("Creditos: " + creditoList);
         SaldoExtrato saldoExtrato = new SaldoExtrato();
         saldoExtrato.setCreditoList(creditoList);
         //Get Debito
-        ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(DEBITO_API_URL, Debito[].class);
-        System.out.println("DEBITO_API_URL: " + DEBITO_API_URL);
+        serviceInstance = discoveryClient.getInstances("debito").get(0);
+        String debitoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/debito";
+        ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(debitoUrl, Debito[].class);
+        System.out.println("DEBITO_API_URL: " + debitoUrl);
         List<Debito> debitoList = Arrays.asList(debitoResponse.getBody());
         System.out.println("Debitos: " + debitoList);
         saldoExtrato.setDebitoList(debitoList);
@@ -43,13 +46,17 @@ public class SaldoExtratoService {
     public SaldoExtrato getBff(){
         RestTemplate restTemplate = new RestTemplate();
         //Get Credito
-        ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(CREDITO_API_URL, Credito[].class);
-        System.out.println("CREDITO_API_URL: " + CREDITO_API_URL);
+        ServiceInstance serviceInstance = discoveryClient.getInstances("credito").get(0);
+        String creditoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/credito";
+        ResponseEntity<Credito[]> creditoResponse = restTemplate.getForEntity(creditoUrl, Credito[].class);
+        System.out.println("CREDITO_API_URL: " + creditoUrl);
         List<Credito> creditoList = Arrays.asList(creditoResponse.getBody());
         System.out.println("Creditos: " + creditoList);
         //Get Debito
-        ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(DEBITO_API_URL, Debito[].class);
-        System.out.println("DEBITO_API_URL: " + DEBITO_API_URL);
+        serviceInstance = discoveryClient.getInstances("debito").get(0);
+        String debitoUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/api/v1/debito";
+        ResponseEntity<Debito[]> debitoResponse = restTemplate.getForEntity(debitoUrl, Debito[].class);
+        System.out.println("DEBITO_API_URL: " + debitoUrl);
         List<Debito> debitoList = Arrays.asList(debitoResponse.getBody());
         System.out.println("Debitos: " + debitoList);
         //Calcular saldo
