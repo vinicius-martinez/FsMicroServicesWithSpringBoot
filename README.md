@@ -1332,33 +1332,49 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
 
 ### 5 - Criação Service Discovery Server <a name="workshop-service-discovery-server">
 
-* Acesse o [Spring Boot Initializer](https://start.spring.io/) e gere um projeto com as seguintes informações:
+* Faça a instalação do [Consul Service Discovery](https://www.consul.io/)
+
+* Inicie o serviço (e.g MacOs): *brew services start consul*
+
+* Verifique se o serviço foi inicializado corretamente acessando o console: *http://localhost:8500/*
+
+* Interrompa a execução de os *Microservices:* **Credito, Debito e SaldoExtrato**
+
+* Adicione as seguintes propriedades nos respectivos *pom.xml* nos projetos: **Credito, Debito e SaldoExtrato**
 
   ```
-  Project: Maven
-  Language: Java
-  Spring Boot: 2.4.2
-  Project Metadata
-    Group: br.com.impacta.fullstack
-    artifact: servicediscovery
-    name: servicediscovery
-    Package Name: br.com.impacta.fullstack.servicediscovery
-    Packaging: jar
-    Java: 11
-  Dependencies:
-    Eureka Server
-  ```
-    ![Criação Service Discovery Server](images/workshop-criacao-servicediscovery-server/criacao-projeto-servicediscovery-server.png)
+  -- linha 16
+  <properties>
+    <java.version>17</java.version>
+    <spring-cloud.version>2022.0.0-M1</spring-cloud.version>
+  </properties>
 
-* Altere o arquivo **pom.xml** desse projeto adicionando a dependência *<dependency><groupId>org.glassfish.jaxb</groupId><artifactId>jaxb-runtime</artifactId></dependency>*:
-
-  ```
   <dependency>
-		<groupId>org.glassfish.jaxb</groupId>
-		<artifactId>jaxb-runtime</artifactId>
-	</dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+  </dependency>
+
+  <dependencyManagement>
+  	<dependencies>
+		  <dependency>
+  			<groupId>org.springframework.cloud</groupId>
+  			<artifactId>spring-cloud-dependencies</artifactId>
+  			<version>${spring-cloud.version}</version>
+  			<type>pom</type>
+  			<scope>import</scope>
+  		</dependency>
+  	</dependencies>
+	</dependencyManagement>
   ```
 
+* Modique as classes **CreditoApplication, DebitoApplication e SaldoExtratoApplication** adicionando as seguintes *Annotations:*
+
+  ```
+  @Configuration
+  @EnableAutoConfiguration
+  @EnableDiscoveryClient
+  ```
+  
 * Altere a classe **ServiceDiscoveryApplication** adicionando a *EnableEurekaServer:
 
   ```
