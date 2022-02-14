@@ -41,7 +41,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação de 
     Spring Boot Actuator
   ```
 
-* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot:run*:
+* Importe o projeto no *IntelliJ* e verifique se o mesmo está sendo executado com sucesso através do comando *mvn spring-boot:run* :
 
   ```
     .   ____          _            __ _ _
